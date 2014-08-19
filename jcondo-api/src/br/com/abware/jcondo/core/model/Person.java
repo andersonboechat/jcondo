@@ -20,6 +20,8 @@ public class Person implements BaseModel {
 	
 	private Gender gender;
 
+	private String picture;
+
 	public long getId() {
 		return id;
 	}
@@ -74,6 +76,14 @@ public class Person implements BaseModel {
 
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 }
