@@ -31,7 +31,7 @@ public abstract class BaseManager<Entity extends BaseEntity, Model extends BaseM
 			BeanUtils.copyProperties(entity, model);
 			return entity;
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("model.entity.convert.exception", e);
 		}
 	}
 
@@ -41,7 +41,7 @@ public abstract class BaseManager<Entity extends BaseEntity, Model extends BaseM
 			BeanUtils.copyProperties(model, entity);
 			return model;
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("entity.model.convert.exception", e);
 		}
 	}
 
@@ -53,7 +53,7 @@ public abstract class BaseManager<Entity extends BaseEntity, Model extends BaseM
 			}
 			return models;
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("entities.models.convert.exception", e);
 		}		
 	}	
 
@@ -76,7 +76,7 @@ public abstract class BaseManager<Entity extends BaseEntity, Model extends BaseM
 			em.refresh(entity);
 		} catch (javax.persistence.PersistenceException e) {
 			em.getTransaction().rollback();
-			throw new PersistenceException();
+			throw new PersistenceException("", e);
 		}
 
 		return entity;
