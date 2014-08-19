@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Dependencies: com.liferay.portal:main, com.liferay.faces:main, br.com.
+ jcondo:main, org.apache.commons.beanutils:main 
+

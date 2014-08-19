@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="jcondo">
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="jcondo-liferay.jar" deploy-path="/" handle="module:/resource/jcondo-liferay/jcondo-liferay">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jcondo-impl.jar" deploy-path="/" handle="module:/resource/jcondo-impl/jcondo-impl">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jcondo-persistence.jar" deploy-path="/" handle="module:/resource/jcondo-persistence/jcondo-persistence">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>

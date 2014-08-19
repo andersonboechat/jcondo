@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:datasources xmlns:p="http://www.jboss.org/ironjacamar/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.jboss.org/ironjacamar/schema datasources_1_1.xsd ">
+  <p:datasource enabled="true" jndi-name="token" jta="true" pool-name="token" spy="false" use-ccm="true" use-java-context="true">
+    <p:connection-url>token</p:connection-url>
+    <p:driver-class>token</p:driver-class>
+    <p:datasource-class>token</p:datasource-class>
+    <p:driver>token</p:driver>
+    <p:connection-property name="token"/>
+    <p:new-connection-sql>p:new-connection-sql</p:new-connection-sql>
+    <p:transaction-isolation>TRANSACTION_READ_UNCOMMITTED</p:transaction-isolation>
+    <p:url-delimiter>token</p:url-delimiter>
+    <p:url-selector-strategy-class-name>token</p:url-selector-strategy-class-name>
+    <p:pool xsi:type="p:poolType">
+      <p:min-pool-size>0</p:min-pool-size>
+      <p:max-pool-size>0</p:max-pool-size>
+      <p:prefill>true</p:prefill>
+      <p:use-strict-min>true</p:use-strict-min>
+      <p:flush-strategy>token</p:flush-strategy>
+      <p:allow-multiple-users/>
+    </p:pool>
+    <p:security>
+      <p:user-name>token</p:user-name>
+      <p:password>token</p:password>
+      <p:security-domain>token</p:security-domain>
+      <p:reauth-plugin class-name="token">
+        <p:config-property name="token">token</p:config-property>
+      </p:reauth-plugin>
+    </p:security>
+    <p:validation>
+      <p:valid-connection-checker class-name="token">
+        <p:config-property name="token">token</p:config-property>
+      </p:valid-connection-checker>
+      <p:check-valid-connection-sql>p:check-valid-connection-sql</p:check-valid-connection-sql>
+      <p:validate-on-match>true</p:validate-on-match>
+      <p:background-validation>true</p:background-validation>
+      <p:background-validation-millis>0</p:background-validation-millis>
+      <p:use-fast-fail>true</p:use-fast-fail>
+      <p:stale-connection-checker class-name="token">
+        <p:config-property name="token">token</p:config-property>
+      </p:stale-connection-checker>
+      <p:exception-sorter class-name="token">
+        <p:config-property name="token">token</p:config-property>
+      </p:exception-sorter>
+    </p:validation>
+    <p:timeout>
+      <p:blocking-timeout-millis>0</p:blocking-timeout-millis>
+      <p:idle-timeout-minutes>0</p:idle-timeout-minutes>
+      <p:set-tx-query-timeout/>
+      <p:query-timeout>0</p:query-timeout>
+      <p:use-try-lock>0</p:use-try-lock>
+      <p:allocation-retry>0</p:allocation-retry>
+      <p:allocation-retry-wait-millis>0</p:allocation-retry-wait-millis>
+      <p:xa-resource-timeout>token</p:xa-resource-timeout>
+    </p:timeout>
+    <p:statement>
+      <p:track-statements>true</p:track-statements>
+      <p:prepared-statement-cache-size>0</p:prepared-statement-cache-size>
+      <p:share-prepared-statements/>
+    </p:statement>
+  </p:datasource>
+  <p:drivers>
+    <p:driver major-version="0" minor-verion="0" module="token" name="token">
+      <p:driver-class>token</p:driver-class>
+      <p:datasource-class>token</p:datasource-class>
+      <p:xa-datasource-class>token</p:xa-datasource-class>
+    </p:driver>
+  </p:drivers>
+</p:datasources>
