@@ -22,7 +22,7 @@ public abstract class AbstractManager<Entity extends PersistedModel, Model exten
 			BeanUtils.copyProperties(model, entity);
 			return model;
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("", e);
 		}
 	}
 
@@ -36,7 +36,7 @@ public abstract class AbstractManager<Entity extends PersistedModel, Model exten
 
 			return models;
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("", e);
 		}		
 	}
 

@@ -25,7 +25,7 @@ public class FlatManagerImpl extends AbstractManager<Organization, Flat> impleme
 		try {
 			return OrganizationLocalServiceUtil.getOrganization(flat.getId());
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("", e);
 		}
 	}
 	
@@ -49,7 +49,7 @@ public class FlatManagerImpl extends AbstractManager<Organization, Flat> impleme
 
 			return getModel(organization);
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("", e);
 		}
 	}
 
@@ -58,7 +58,7 @@ public class FlatManagerImpl extends AbstractManager<Organization, Flat> impleme
 		try {
 			return getModel(OrganizationLocalServiceUtil.getOrganization((Long) id));
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("", e);
 		}
 	}
 
@@ -68,7 +68,7 @@ public class FlatManagerImpl extends AbstractManager<Organization, Flat> impleme
 			//int amount = OrganizationLocalServiceUtil.getOrganizationsCount();
 			return getModels(OrganizationLocalServiceUtil.getOrganizations(-1, -1));
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("", e);
 		}
 	
 	}
@@ -78,7 +78,7 @@ public class FlatManagerImpl extends AbstractManager<Organization, Flat> impleme
 		try {
 			return getModels(OrganizationLocalServiceUtil.getUserOrganizations(person.getId()));
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("", e);
 		}
 	}
 }

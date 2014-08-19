@@ -50,7 +50,7 @@ public class ImageManagerImpl extends AbstractManager<DLFileEntry, Image> implem
 		} catch (NoSuchFolderException e) { 
 			//TODO log it!
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("", e);
 		}
 
 		return images;
@@ -60,7 +60,7 @@ public class ImageManagerImpl extends AbstractManager<DLFileEntry, Image> implem
 		try {
 			return new Image(fe.getFileEntryId(), fe.getTitle(), fe.getDescription(), fe.getFolder().getPath() + fe.getTitle());
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("", e);
 		}
 	}
 
@@ -74,7 +74,7 @@ public class ImageManagerImpl extends AbstractManager<DLFileEntry, Image> implem
 		try {
 			return (DLFileEntry) DLAppLocalServiceUtil.getFileEntry(image.getId()).getModel();
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("", e);
 		}
 	}
 

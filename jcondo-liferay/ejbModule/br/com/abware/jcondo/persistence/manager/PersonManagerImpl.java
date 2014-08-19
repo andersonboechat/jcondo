@@ -21,7 +21,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 
-import br.com.abware.jcondo.core.RolePermission;
+import br.com.abware.jcondo.core.Permission;
 import br.com.abware.jcondo.core.model.Flat;
 import br.com.abware.jcondo.core.model.Person;
 import br.com.abware.jcondo.core.persistence.PersonManager;
@@ -39,7 +39,7 @@ public class PersonManagerImpl extends AbstractManager<User, Person> implements 
 		try {
 			return UserLocalServiceUtil.getUserById(person.getId());
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("");
 		}
 	}
 
@@ -83,17 +83,9 @@ public class PersonManagerImpl extends AbstractManager<User, Person> implements 
 //				UserLocalServiceUtil.updatePortrait(user.getUserId(), 
 //						 							FileUtils.readFileToByteArray(portrait));
 //			}
-		} catch (PortalException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		
 		return null;
 	}
@@ -117,7 +109,7 @@ public class PersonManagerImpl extends AbstractManager<User, Person> implements 
 			List<User> users = UserLocalServiceUtil.getOrganizationUsers(flat.getId());
 			return getModels(users);
 		} catch (SystemException e) {
-			throw new PersistenceException();
+			throw new PersistenceException("");
 		}
 	}
 	
@@ -125,36 +117,51 @@ public class PersonManagerImpl extends AbstractManager<User, Person> implements 
 		try {
 			return getModel(helper.getUser());
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("");
 		}	
 	}
 
+	@Override
+	public Person getModel(User user) throws PersistenceException {
+		Person person = super.getModel(user);
+
+		try {
+			person.setPicture(user.getPortraitURL(helper.getThemeDisplay()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return person;
+	}
+	
 	@Override
 	public Person findById(Object id) throws PersistenceException {
 		try {
 			return getModel(UserLocalServiceUtil.getUser((Long) id));
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("");
 		}
 	}
 
 	@Override
 	public List<Person> findAll() throws PersistenceException {
 		try {
-			List<User> users = UserLocalServiceUtil.getUsers(0, UserLocalServiceUtil.getUsersCount());
+			List<User> users = UserLocalServiceUtil.getUsers(-1, -1);
 			return getModels(users);
 		} catch (Exception e) {
-			throw new PersistenceException();
+			throw new PersistenceException("");
 		}
 	}
 
 	@Override
-	public boolean hasPermission(Person person, RolePermission permission) {
+	public boolean hasPermission(Person person, Permission permission) {
 		try {
 			PermissionChecker permissionChecker = PermissionCheckerFactoryUtil.create(helper.getUser());
 
-			if (permission == RolePermission.UPDATE_PERSON) {
+			if (permission == Permission.UPDATE_PERSON) {
 				return UserPermissionUtil.contains(permissionChecker, person.getId(), ActionKeys.UPDATE);
+			} else if (permission == Permission.ADD_USER) { 
+				return UserPermissionUtil.contains(permissionChecker, person.getId(), ActionKeys.ADD_USER);
 			} else {
 				throw new br.com.abware.jcondo.exception.SystemException("Permission not supported");
 			}
