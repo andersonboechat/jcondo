@@ -7,12 +7,14 @@ import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
-import br.com.abware.jcondo.core.BaseRole;
-import br.com.abware.jcondo.core.RolePermission;
+import br.com.abware.jcondo.core.Permission;
 import br.com.abware.jcondo.core.model.Flat;
 import br.com.abware.jcondo.core.model.Person;
 import br.com.abware.jcondo.core.persistence.PersonManager;
 import br.com.abware.jcondo.exception.ApplicationException;
+import br.com.abware.jcondo.exception.BusinessException;
+import br.com.abware.jcondo.exception.Message;
+import br.com.abware.jcondo.exception.PersistenceException;
 
 
 @Stateless(name="personService")
@@ -33,34 +35,6 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public BaseRole getRole(Flat flat) {
-//		FlatRole flatRole = null;
-//		try {
-//			Organization organization = ((FlatImpl) flat).getOrganization();
-//
-//			if (organization != null && organization.getGroup() != null) {
-//				List<UserGroupRole> roles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(getId(), 
-//																			   				organization.getGroup().getGroupId());
-//
-//				if (!roles.isEmpty()) {
-//					flatRole = new FlatRole(roles.get(0).getRole()); 
-//				} else {
-//					Role role = RoleLocalServiceUtil.getRole(organization.getCompanyId(), RoleConstants.ORGANIZATION_USER);
-//					flatRole = new FlatRole(role); 
-//				}
-//			}
-//		} catch (PortalException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (SystemException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
-		return null;
-	}
-
-	@Override
 	public void setPortrait(File file) {
 		// TODO Auto-generated method stub
 		
@@ -73,15 +47,21 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public boolean isAllowed(RolePermission permission, Person person) {
-		return manager.hasPermission(person, permission);
+	public boolean hasPermission(Person person, Permission permission) throws ApplicationException {
+		return manager.hasPermission(person == null ? manager.getLoggedPerson() : person, permission);
 	}
 
-	public void save(Person person) throws ApplicationException {
-		manager.save(person, manager.getLoggedPerson().getId());
+	@Override
+	public Person save(Person person) throws ApplicationException {
+		try {
+			return manager.save(person, manager.getLoggedPerson().getId());
+		} catch (PersistenceException e) {
+			throw new BusinessException(Message.OPERATION_NOT_ALLOWED.name());
+		}
 	}
 
 	public void delete(Person person) {
 	}
+
 
 }

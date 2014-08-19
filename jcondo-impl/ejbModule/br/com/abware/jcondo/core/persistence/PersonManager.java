@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import br.com.abware.jcondo.core.RolePermission;
+import br.com.abware.jcondo.core.Permission;
 import br.com.abware.jcondo.core.model.Flat;
 import br.com.abware.jcondo.core.model.Person;
 import br.com.abware.jcondo.exception.PersistenceException;
@@ -16,6 +16,6 @@ public interface PersonManager extends ModelManager<Person> {
 
 	public List<Person> getPeople(Flat flat) throws PersistenceException;
 
-	public boolean hasPermission(Person person, RolePermission permission);
+	public boolean hasPermission(Person person, Permission permission);
 
 }
