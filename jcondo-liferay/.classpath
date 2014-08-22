@@ -13,5 +13,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/jcondo-impl"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/jcondo-api"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

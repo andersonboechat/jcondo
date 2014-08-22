@@ -53,19 +53,19 @@ public class RoomBookingServiceImpl implements RoomBookingService {
 
 	@Override
 	public RoomBooking book(Person person, Room room, Date date) throws ApplicationException {
-		return roomBookingManager.save(new RoomBooking(person, room, date), personManager.getLoggedPerson().getId());
+		return roomBookingManager.save(new RoomBooking(person, room, date));
 	}
 
 	@Override
 	public void cancel(RoomBooking booking) throws ApplicationException {
 		booking.setStatus(BookingStatus.CANCELLED);
-		roomBookingManager.save(booking, personManager.getLoggedPerson().getId());
+		roomBookingManager.save(booking);
 	}
 
 	@Override
 	public void discharge(RoomBooking booking) throws ApplicationException {
 		booking.setStatus(BookingStatus.PAID);
-		roomBookingManager.save(booking, personManager.getLoggedPerson().getId());
+		roomBookingManager.save(booking);
 	}
 
 	@Override

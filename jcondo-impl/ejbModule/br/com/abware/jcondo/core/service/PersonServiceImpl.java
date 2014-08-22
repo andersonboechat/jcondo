@@ -7,6 +7,8 @@ import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import br.com.abware.jcondo.core.Permission;
 import br.com.abware.jcondo.core.model.Flat;
 import br.com.abware.jcondo.core.model.Person;
@@ -52,9 +54,17 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public Person save(Person person) throws ApplicationException {
+	public Person register(Person person) throws ApplicationException {
 		try {
-			return manager.save(person, manager.getLoggedPerson().getId());
+			if (CollectionUtils.isEmpty(person.getFlats())) {
+				throw new BusinessException("");
+			}
+
+			if (person.getHome() == null) {
+				person.setHome(person.getFlats().get(0));
+			}
+
+			return manager.save(person);
 		} catch (PersistenceException e) {
 			throw new BusinessException(Message.OPERATION_NOT_ALLOWED.name());
 		}

@@ -12,7 +12,7 @@ import br.com.abware.jcondo.exception.PersistenceException;
 public class RoleManagerImpl extends AbstractManager<com.liferay.portal.model.Role, Role> implements RoleManager {
 
 	@Override
-	public Role save(Role model, long personId) throws PersistenceException {
+	public Role save(Role model) throws PersistenceException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -31,7 +31,7 @@ public class RoleManagerImpl extends AbstractManager<com.liferay.portal.model.Ro
 	@Override
 	public List<Role> findByRoleType(RoleType type) throws PersistenceException {
 		try {
-			return getModels(RoleLocalServiceUtil.getRoles(type.ordinal(), -1));
+			return getModels(RoleLocalServiceUtil.getRoles(type.ordinal(), null));
 		} catch (Exception e) {
 			throw new PersistenceException("");
 		}

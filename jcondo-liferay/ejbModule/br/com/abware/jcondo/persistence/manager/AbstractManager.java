@@ -6,17 +6,18 @@ import java.util.List;
 import org.apache.commons.beanutils.BeanUtils;
 
 import br.com.abware.jcondo.core.model.BaseModel;
+import br.com.abware.jcondo.core.persistence.ModelManager;
 import br.com.abware.jcondo.exception.PersistenceException;
 
 import com.liferay.portal.model.PersistedModel;
 
-public abstract class AbstractManager<Entity extends PersistedModel, Model extends BaseModel> {
+public abstract class AbstractManager<Entity extends PersistedModel, Model extends BaseModel> implements ModelManager<Model> {
 
 	protected abstract Class<Model> getModelClass();
 
 	protected abstract Entity getEntity(Model model) throws PersistenceException;
 	
-	protected Model getModel(Entity entity) throws PersistenceException {
+	public Model getModel(Entity entity) throws PersistenceException {
 		try {
 			Model model = getModelClass().newInstance();
 			BeanUtils.copyProperties(model, entity);

@@ -1,13 +1,12 @@
-package br.com.abware.jcondo.core.model;
+package br.com.abware.jcondo.core;
 
-import br.com.abware.jcondo.core.Organization;
+public abstract class Organization {
 
-
-public class Flat extends Organization implements BaseModel {
-	
 	private long id;
 	
 	private String name;
+	
+	private String type;
 
 	public long getId() {
 		return id;
@@ -24,6 +23,12 @@ public class Flat extends Organization implements BaseModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 }

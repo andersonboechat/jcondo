@@ -21,7 +21,7 @@ import br.com.abware.jcondo.exception.PersistenceException;
 public class ImageManagerImpl extends AbstractManager<DLFileEntry, Image> implements ImageManager {
 
 	@Override
-	public Image save(Image model, long personId) throws PersistenceException {
+	public Image save(Image model) throws PersistenceException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -56,7 +56,7 @@ public class ImageManagerImpl extends AbstractManager<DLFileEntry, Image> implem
 		return images;
 	}
 
-	protected Image getModel(DLFileEntry fe) throws PersistenceException {
+	public Image getModel(DLFileEntry fe) throws PersistenceException {
 		try {
 			return new Image(fe.getFileEntryId(), fe.getTitle(), fe.getDescription(), fe.getFolder().getPath() + fe.getTitle());
 		} catch (Exception e) {

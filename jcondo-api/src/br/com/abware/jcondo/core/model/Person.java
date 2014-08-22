@@ -1,8 +1,11 @@
 package br.com.abware.jcondo.core.model;
 
 import java.util.Date;
+import java.util.List;
 
 import br.com.abware.jcondo.core.Gender;
+import br.com.abware.jcondo.core.PersonStatus;
+import br.com.abware.jcondo.core.Organization;
 
 public class Person implements BaseModel {
 
@@ -21,6 +24,12 @@ public class Person implements BaseModel {
 	private Gender gender;
 
 	private String picture;
+	
+	private PersonStatus status;
+	
+	private Organization organization;
+	
+	private List<Organization> organizations;
 
 	public long getId() {
 		return id;
@@ -84,6 +93,14 @@ public class Person implements BaseModel {
 
 	public void setPicture(String picture) {
 		this.picture = picture;
+	}
+
+	public PersonStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(PersonStatus status) {
+		this.status = status;
 	}
 
 }

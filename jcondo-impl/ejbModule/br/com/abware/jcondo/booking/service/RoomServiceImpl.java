@@ -24,7 +24,7 @@ public class RoomServiceImpl implements RoomService {
 	
 	@Override
 	public Room create(Room room) throws ApplicationException {
-		return roomManager.save(room, personManager.getLoggedPerson().getId());
+		return roomManager.save(room);
 	}
 
 	@Override

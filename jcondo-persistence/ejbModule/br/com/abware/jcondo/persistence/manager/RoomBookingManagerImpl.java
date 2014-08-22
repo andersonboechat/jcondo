@@ -3,12 +3,14 @@ package br.com.abware.jcondo.persistence.manager;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 import br.com.abware.jcondo.booking.model.Room;
 import br.com.abware.jcondo.booking.model.RoomBooking;
 import br.com.abware.jcondo.booking.persistence.RoomBookingManager;
+import br.com.abware.jcondo.core.persistence.PersonManager;
 import br.com.abware.jcondo.exception.PersistenceException;
 import br.com.abware.jcondo.persistence.entity.Booking;
 import br.com.abware.jcondo.persistence.entity.BookingPK;
@@ -16,6 +18,9 @@ import br.com.abware.jcondo.persistence.entity.BookingPK;
 @Stateless
 public class RoomBookingManagerImpl extends BaseManager<Booking, RoomBooking> implements RoomBookingManager {
 
+	@EJB
+	private PersonManager personManager;
+	
 	@SuppressWarnings("unchecked")
 	public List<RoomBooking> findActiveBookingsByPeriod(Date startDate, Date endDate) throws PersistenceException {
 		String queryString = "FROM Booking WHERE status <> '2' AND date BETWEEN :startDate AND :endDate";
@@ -39,6 +44,13 @@ public class RoomBookingManagerImpl extends BaseManager<Booking, RoomBooking> im
 		List<Booking> bookings = query.getResultList();
 
 		return getModels(bookings);
+	}
+	
+	@Override
+	public RoomBooking getModel(Booking booking) throws PersistenceException {
+		RoomBooking rb = super.getModel(booking);
+		rb.setPerson(personManager.findById(booking.getId()));
+		return rb;
 	}
 	
 	@Override

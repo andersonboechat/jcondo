@@ -7,7 +7,7 @@ import br.com.abware.jcondo.exception.PersistenceException;
 
 public interface ModelManager<Model extends BaseModel> {
 
-	public Model save(Model model, long personId) throws PersistenceException;
+	public Model save(Model model) throws PersistenceException;
 
 	public Model findById(Object id) throws PersistenceException;
 	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,6 +14,7 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import br.com.abware.jcondo.core.model.BaseModel;
 import br.com.abware.jcondo.core.persistence.ModelManager;
+import br.com.abware.jcondo.core.persistence.PersonManager;
 import br.com.abware.jcondo.exception.PersistenceException;
 import br.com.abware.jcondo.persistence.entity.BaseEntity;
 
@@ -20,6 +22,9 @@ public abstract class BaseManager<Entity extends BaseEntity, Model extends BaseM
 
 	@PersistenceContext(name="jcondo-persistence")
 	protected EntityManager em;
+	
+	@EJB
+	protected PersonManager personManager;	
 
 	protected abstract Class<Entity> getEntityClass();
 
@@ -57,23 +62,23 @@ public abstract class BaseManager<Entity extends BaseEntity, Model extends BaseM
 		}		
 	}	
 
-	protected Entity save(Entity entity, long agentId) throws PersistenceException {
+	protected Entity save(Entity entity) throws PersistenceException {
 		try {
 			Date date = new Date();
-			Date createDate = entity.getCreateDate(); 
-			entity.setAgentId(agentId);
+			Date createDate = entity.getCreateDate();
+			entity.setAgentId(personManager.getLoggedPerson().getId());
 			entity.setModifiedDate(date);
 
 			try {
 				entity.setCreateDate(date);
 				em.persist(entity);
+				em.flush();
 			} catch (EntityExistsException e) {
 				entity.setCreateDate(createDate);
 				em.merge(entity);
+				em.flush();
 			}
 
-			em.flush();
-			em.refresh(entity);
 		} catch (javax.persistence.PersistenceException e) {
 			em.getTransaction().rollback();
 			throw new PersistenceException("", e);
@@ -82,9 +87,8 @@ public abstract class BaseManager<Entity extends BaseEntity, Model extends BaseM
 		return entity;
 	}
 
-	public Model save(Model model, long agentId) throws PersistenceException {
-		save(getEntity(model), agentId);
-		return model;
+	public Model save(Model model) throws PersistenceException {
+		return getModel(save(getEntity(model)));
 	}
 
 	public Model findById(Object id) throws PersistenceException {

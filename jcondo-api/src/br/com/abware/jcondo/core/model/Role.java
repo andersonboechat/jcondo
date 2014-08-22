@@ -1,10 +1,15 @@
 package br.com.abware.jcondo.core.model;
 
+import br.com.abware.jcondo.core.RoleType;
+
 public class Role implements BaseModel {
 
 	private long id;
 	
 	private String title;
+	
+	private RoleType type;
+
 
 	public long getId() {
 		return id;
@@ -20,6 +25,10 @@ public class Role implements BaseModel {
 
 	public void setTitle(String name) {
 		this.title = name;
+	}
+
+	public RoleType getType() {
+		return type;
 	}
 
 }

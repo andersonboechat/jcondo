@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.liferay.faces.portal.context.LiferayPortletHelper;
@@ -12,7 +14,6 @@ import com.liferay.faces.portal.context.LiferayPortletHelperImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -21,7 +22,9 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 
+import br.com.abware.jcondo.core.Gender;
 import br.com.abware.jcondo.core.Permission;
+import br.com.abware.jcondo.core.PersonStatus;
 import br.com.abware.jcondo.core.model.Flat;
 import br.com.abware.jcondo.core.model.Person;
 import br.com.abware.jcondo.core.persistence.PersonManager;
@@ -32,12 +35,24 @@ public class PersonManagerImpl extends AbstractManager<User, Person> implements 
 
 	private static final long GUEST_ROLE_ID = 0;
 	
+	private static final String HOME = "RESIDENCIA";
+	
 	private LiferayPortletHelper helper = new LiferayPortletHelperImpl();	
 
 	@Override
 	protected User getEntity(Person person) throws PersistenceException {
 		try {
-			return UserLocalServiceUtil.getUserById(person.getId());
+			User user;
+
+			if (person.getId() == 0) {
+				user = UserLocalServiceUtil.createUser(person.getId());
+			} else {
+				user = UserLocalServiceUtil.getUserById(person.getId());
+			}
+
+			BeanUtils.copyProperties(user, person);
+
+			return user;
 		} catch (Exception e) {
 			throw new PersistenceException("");
 		}
@@ -49,45 +64,56 @@ public class PersonManagerImpl extends AbstractManager<User, Person> implements 
 	}
 
 	@Override
-	public Person save(Person person, long personId) throws PersistenceException {
+	public Person save(Person person) throws PersistenceException {
 		try {
+			User user;
+			Person p;
+
 			if (person.getId() == 0) {
 				User creatorUser = helper.getUser();
-				User user = UserLocalServiceUtil.createUser(person.getId());
-				Contact contact = user.getContact();
-				
 				Calendar c = Calendar.getInstance();
-				c.setTime(contact.getBirthday());
+				c.setTime(person.getBirthday());
 
 				int birthdayDay = c.get(Calendar.DAY_OF_MONTH);
 				int birthdayMonth = c.get(Calendar.MONTH);
 				int birthdayYear = c.get(Calendar.YEAR);
 
+				boolean isMale = person.getGender().equals(Gender.MALE);
+
+				long[] flatIds = new long[person.getFlats().size()];
+
+				for (int i = 0; person.getFlats().iterator().hasNext(); i++) {
+					flatIds[i] = person.getFlats().iterator().next().getId();
+				}
+
 				user = UserLocalServiceUtil.addUser(creatorUser.getUserId(), creatorUser.getCompanyId(), true, 
 											 		StringUtils.EMPTY, StringUtils.EMPTY, true, StringUtils.EMPTY, 
-											 		user.getEmailAddress(), 0, StringUtils.EMPTY, creatorUser.getLocale(), 
-											 		user.getFirstName(), StringUtils.EMPTY, user.getLastName(), 0, 0, 
-											 		contact.getMale(), birthdayMonth, birthdayDay, birthdayYear, 
+											 		person.getEmailAddress(), 0, StringUtils.EMPTY, creatorUser.getLocale(), 
+											 		person.getFirstName(), StringUtils.EMPTY, person.getLastName(), 0, 0, 
+											 		isMale, birthdayMonth, birthdayDay, birthdayYear, 
 											 		StringUtils.EMPTY, creatorUser.getGroupIds(), 
-											 		creatorUser.getOrganizationIds(), creatorUser.getRoleIds(), 
+											 		flatIds, creatorUser.getRoleIds(), 
 											 		new long[] {GUEST_ROLE_ID}, true, new ServiceContext());
 
-				contact = user.getContact();
+				p = getModel(user);
 			} else {
-				User user = getEntity(person);
+				p = person;
+				user = getEntity(person);
 				user.persist();
 				user.getContact().persist();
 			}
+
+			user.getExpandoBridge().setAttribute(HOME, person.getHome().getId());
 			
 //			if (portrait != null) {
 //				UserLocalServiceUtil.updatePortrait(user.getUserId(), 
 //						 							FileUtils.readFileToByteArray(portrait));
 //			}
+
+			return p;
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new PersistenceException("", e);
 		}
-		
-		return null;
 	}
 
 	public void delete(Person person) {
@@ -126,6 +152,25 @@ public class PersonManagerImpl extends AbstractManager<User, Person> implements 
 		Person person = super.getModel(user);
 
 		try {
+			if (!CollectionUtils.isEmpty(person.getFlats())) {
+				Flat home = person.getFlats().get(0);
+				if (person.getFlats().size() > 1) {
+					Long id = (Long) user.getExpandoBridge().getAttribute(HOME);
+					if (id > 0) {
+						home = new Flat();
+						home.setId(id);
+						int index = person.getFlats().indexOf(home);
+						if (index > -1) {
+							home = person.getFlats().get(index);
+						}
+					}
+				}
+
+				person.setHome(home);
+			}
+
+			person.setStatus(PersonStatus.parseStatus(user.getStatus()));
+
 			person.setPicture(user.getPortraitURL(helper.getThemeDisplay()));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -147,6 +192,8 @@ public class PersonManagerImpl extends AbstractManager<User, Person> implements 
 	public List<Person> findAll() throws PersistenceException {
 		try {
 			List<User> users = UserLocalServiceUtil.getUsers(-1, -1);
+			
+			
 			return getModels(users);
 		} catch (Exception e) {
 			throw new PersistenceException("");

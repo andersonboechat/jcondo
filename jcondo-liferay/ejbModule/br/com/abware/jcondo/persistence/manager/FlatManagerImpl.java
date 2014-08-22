@@ -29,14 +29,14 @@ public class FlatManagerImpl extends AbstractManager<Organization, Flat> impleme
 		}
 	}
 	
-	protected Flat getModel(Organization organization) throws PersistenceException {
+	public Flat getModel(Organization organization) throws PersistenceException {
 		Flat flat = super.getModel(organization);
 		flat.setId(organization.getOrganizationId());
 		return flat;
 	}
 
 	@Override
-	public Flat save(Flat flat, long personId) throws PersistenceException {
+	public Flat save(Flat flat) throws PersistenceException {
 		try {
 			Organization organization;
 

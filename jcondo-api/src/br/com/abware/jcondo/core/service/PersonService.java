@@ -10,7 +10,7 @@ import br.com.abware.jcondo.exception.ApplicationException;
 
 public interface PersonService extends BaseService<Person> {
 
-	public Person save(Person person) throws ApplicationException;
+	public Person register(Person person) throws ApplicationException;
 	
 	public Person getPerson() throws ApplicationException;
 	

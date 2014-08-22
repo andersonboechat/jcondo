@@ -23,7 +23,7 @@ public class OccurrenceServiceImpl implements OccurrenceService {
 	private PersonManager personManager;	
 
 	public Occurrence create(Occurrence occurrence) throws ApplicationException {
-		return occurrenceManager.save(occurrence, personManager.getLoggedPerson().getId());
+		return occurrenceManager.save(occurrence);
 	}
 
 	public void delete(Occurrence occurrence) throws ApplicationException {
@@ -38,6 +38,11 @@ public class OccurrenceServiceImpl implements OccurrenceService {
 	@Override
 	public List<Occurrence> getOccurrences(Person person) throws ApplicationException {
 		return occurrenceManager.findOccurrencesByPersonId(person.getId());
+	}
+
+	@Override
+	public Occurrence register(Occurrence occurrence) throws ApplicationException {
+		return occurrenceManager.save(occurrence);
 	}
 
 }

@@ -12,5 +12,7 @@ public interface OccurrenceService extends BaseService<Occurrence>{
 	public Occurrence getOccurrenceById(long id) throws ApplicationException;
 
 	public List<Occurrence> getOccurrences(Person person) throws ApplicationException;
+	
+	public Occurrence register(Occurrence occurrence) throws ApplicationException;
 
 }
