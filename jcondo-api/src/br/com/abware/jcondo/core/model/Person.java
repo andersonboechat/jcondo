@@ -23,7 +23,7 @@ public class Person implements BaseModel {
 	
 	private Gender gender;
 
-	private String picture;
+	private Image picture;
 	
 	private PersonStatus status;
 	
@@ -31,6 +31,12 @@ public class Person implements BaseModel {
 	
 	private List<Organization> organizations;
 
+	private List<Roleship> roleships;
+	
+	public Person() {
+		this.gender = Gender.MALE;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -87,11 +93,11 @@ public class Person implements BaseModel {
 		this.gender = gender;
 	}
 
-	public String getPicture() {
+	public Image getPicture() {
 		return picture;
 	}
 
-	public void setPicture(String picture) {
+	public void setPicture(Image picture) {
 		this.picture = picture;
 	}
 
@@ -101,6 +107,30 @@ public class Person implements BaseModel {
 
 	public void setStatus(PersonStatus status) {
 		this.status = status;
+	}
+
+	public Organization getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
+	}
+
+	public List<Organization> getOrganizations() {
+		return organizations;
+	}
+
+	public void setOrganizations(List<Organization> organizations) {
+		this.organizations = organizations;
+	}
+
+	public List<Roleship> getRoleships() {
+		return roleships;
+	}
+
+	public void setRoleships(List<Roleship> roleships) {
+		this.roleships = roleships;
 	}
 
 }

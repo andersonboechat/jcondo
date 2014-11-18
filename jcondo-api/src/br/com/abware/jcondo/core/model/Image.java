@@ -10,8 +10,12 @@ public class Image implements BaseModel {
 	
 	private String descrption;
 
-	public Image(long id, String path, String title, String descrption) {
+	public Image() {
 		super();
+	}
+	
+	public Image(long id, String path, String title, String descrption) {
+		this();
 		this.id = id;
 		this.path = path;
 		this.title = title;
