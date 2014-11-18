@@ -1,5 +1,7 @@
 package br.com.abware.jcondo.persistence.manager;
 
+import java.io.File;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import javax.ejb.Stateless;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.liferay.faces.portal.context.LiferayPortletHelper;
@@ -103,12 +106,12 @@ public class PersonManagerImpl extends AbstractManager<User, Person> implements 
 				user.getContact().persist();
 			}
 
-			user.getExpandoBridge().setAttribute(HOME, person.getHome().getId());
+			//user.getExpandoBridge().setAttribute(HOME, person.getHome().getId());
 			
-//			if (portrait != null) {
-//				UserLocalServiceUtil.updatePortrait(user.getUserId(), 
-//						 							FileUtils.readFileToByteArray(portrait));
-//			}
+			if (person.getPicture() != null && person.getPicture().getId() == 0) {
+				File file = new File(new URL(person.getPicture().getPath()).toURI());
+				UserLocalServiceUtil.updatePortrait(person.getId(),	FileUtils.readFileToByteArray(file));
+			}
 
 			return p;
 		} catch (Exception e) {
