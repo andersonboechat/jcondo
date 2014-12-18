@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
+import br.com.abware.jcondo.booking.model.BookingStatus;
 import br.com.abware.jcondo.booking.model.Room;
 import br.com.abware.jcondo.booking.model.RoomBooking;
 import br.com.abware.jcondo.booking.persistence.RoomBookingManager;
@@ -22,8 +23,8 @@ public class RoomBookingManagerImpl extends BaseManager<Booking, RoomBooking> im
 	private PersonManager personManager;
 	
 	@SuppressWarnings("unchecked")
-	public List<RoomBooking> findActiveBookingsByPeriod(Date startDate, Date endDate) throws PersistenceException {
-		String queryString = "FROM Booking WHERE status <> '2' AND date BETWEEN :startDate AND :endDate";
+	public List<RoomBooking> findBookingsByPeriod(Date startDate, Date endDate) throws PersistenceException {
+		String queryString = "FROM Booking WHERE date BETWEEN :startDate AND :endDate";
 
 		Query query = em.createQuery(queryString);
 		query.setParameter("startDate", startDate);
@@ -64,8 +65,10 @@ public class RoomBookingManagerImpl extends BaseManager<Booking, RoomBooking> im
 	}
 
 	@Override
-	public RoomBooking findBooking(Room room, Date date) throws PersistenceException {
-		return findById(new BookingPK(room.getId(), date));
+	public RoomBooking findBooking(Room room, Date beginDate, Date endDate, BookingStatus status) throws PersistenceException {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 	
 }

@@ -18,9 +18,10 @@ public class RoomManagerImpl extends BaseManager<Room, br.com.abware.jcondo.book
 	private ImageManager imageManager;	
 
 	@SuppressWarnings("unchecked")
-	public List<br.com.abware.jcondo.booking.model.Room> findAvailableRooms() throws PersistenceException {
-		String queryString = "FROM Room WHERE available = 1";
+	public List<br.com.abware.jcondo.booking.model.Room> findRooms(boolean available) throws PersistenceException {
+		String queryString = "FROM Room WHERE available = :available";
 		Query query = em.createQuery(queryString);
+		query.setParameter("available", available);
 
 		List<Room> rooms = query.getResultList();
 
