@@ -11,6 +11,6 @@ import br.com.abware.jcondo.exception.PersistenceException;
 @Local
 public interface RoomManager extends ModelManager<Room> {
 
-	public List<Room> findAvailableRooms() throws PersistenceException;
+	public List<Room> findRooms(boolean available) throws PersistenceException;
 
 }
