@@ -13,16 +13,19 @@ public class Booking<Resource extends Bookable> implements BaseModel {
 
 	private Resource resource;
 
-	private Date date;
+	private Date dateIn;
+	
+	private Date dateOut;
 
 	private double price;
 
 	private BookingStatus status;
 	
-	public Booking(Person person, Resource resource, Date date) {
+	public Booking(Person person, Resource resource, Date dateIn, Date dateOut) {
 		this.person = person;
 		this.resource = resource;
-		this.date = date;
+		this.dateIn = dateIn;
+		this.dateOut = dateOut;
 	}
 
 	public Booking() {
@@ -52,12 +55,20 @@ public class Booking<Resource extends Bookable> implements BaseModel {
 		this.resource = resource;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getDateIn() {
+		return dateIn;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDateIn(Date date) {
+		this.dateIn = date;
+	}
+
+	public Date getDateOut() {
+		return dateOut;
+	}
+
+	public void setDateOut(Date dateOut) {
+		this.dateOut = dateOut;
 	}
 
 	public double getPrice() {

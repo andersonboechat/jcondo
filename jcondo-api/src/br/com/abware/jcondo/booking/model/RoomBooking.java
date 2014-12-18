@@ -10,8 +10,8 @@ public class RoomBooking extends Booking<Room> {
 		super();
 	}
 
-	public RoomBooking(Person person, Room resource, Date date) {
-		super(person, resource, date);
+	public RoomBooking(Person person, Room resource, Date dateIn, Date dateOut) {
+		super(person, resource, dateIn, dateOut);
 	}
 
 }

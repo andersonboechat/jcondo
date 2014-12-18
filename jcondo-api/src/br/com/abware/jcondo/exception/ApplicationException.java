@@ -7,19 +7,15 @@ public class ApplicationException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	private ResourceBundle rb = ResourceBundle.getBundle("Language");
+	private ResourceBundle rb = ResourceBundle.getBundle("AppException");
 
 	protected Object[] args;
 
-	public ApplicationException(String message) {
-		this(message, "");
-	}
-
-	public ApplicationException(String message, Object ... args) {
-		super(message);
+	public ApplicationException(Throwable throwable, String message, Object ... args) {
+		super(message, throwable);
 		this.args = args;
 	}
-	
+
 	@Override
 	public String getLocalizedMessage() {
 		return MessageFormat.format(rb.getString(getMessage()), ((Object) args));
@@ -29,7 +25,7 @@ public class ApplicationException extends Exception {
 		return args;
 	}
 
-	public void setArgs(Object[] args) {
+	public void setArgs(Object ... args) {
 		this.args = args;
 	}
 
