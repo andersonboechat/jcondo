@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import org.apache.commons.collections.CollectionUtils;
 
 import br.com.abware.jcondo.core.Permission;
+import br.com.abware.jcondo.core.model.Domain;
 import br.com.abware.jcondo.core.model.Flat;
 import br.com.abware.jcondo.core.model.Person;
 import br.com.abware.jcondo.core.persistence.PersonManager;
@@ -32,7 +33,7 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public List<Person> getPeople(Flat flat) throws ApplicationException {
+	public List<Person> getPeople(Domain flat) throws ApplicationException {
 		return manager.getPeople(flat);
 	}
 
