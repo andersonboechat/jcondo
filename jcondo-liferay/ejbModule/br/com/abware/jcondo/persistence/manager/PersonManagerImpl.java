@@ -28,6 +28,7 @@ import com.liferay.portal.service.permission.UserPermissionUtil;
 import br.com.abware.jcondo.core.Gender;
 import br.com.abware.jcondo.core.Permission;
 import br.com.abware.jcondo.core.PersonStatus;
+import br.com.abware.jcondo.core.model.Domain;
 import br.com.abware.jcondo.core.model.Flat;
 import br.com.abware.jcondo.core.model.Person;
 import br.com.abware.jcondo.core.persistence.PersonManager;
@@ -133,9 +134,9 @@ public class PersonManagerImpl extends AbstractManager<User, Person> implements 
 		}
 	}
 
-	public List<Person> getPeople(Flat flat) throws PersistenceException {
+	public List<Person> getPeople(Domain domain) throws PersistenceException {
 		try {
-			List<User> users = UserLocalServiceUtil.getOrganizationUsers(flat.getId());
+			List<User> users = UserLocalServiceUtil.getOrganizationUsers(domain.getId());
 			return getModels(users);
 		} catch (SystemException e) {
 			throw new PersistenceException("");

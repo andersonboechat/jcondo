@@ -18,15 +18,15 @@ public class PersonStatusConverter implements Converter {
 			if (dest instanceof PersonStatus && orig instanceof Integer) {
 				Integer status = (Integer) orig;
 				if (status == WorkflowConstants.STATUS_APPROVED) {
-					dest = PersonStatus.ATIVO;
+					dest = PersonStatus.ACTIVE;
 				} else if (status == WorkflowConstants.STATUS_DENIED) {
-					dest = PersonStatus.ATIVO;
+					dest = PersonStatus.ACTIVE;
 				} else {
 					
 				}
 			} else if (dest instanceof Integer && orig instanceof PersonStatus) {
 				PersonStatus status = (PersonStatus) orig;
-				if (PersonStatus.ATIVO.equals(status)) {
+				if (PersonStatus.ACTIVE.equals(status)) {
 					dest = WorkflowConstants.STATUS_APPROVED;
 				} else {
 					dest = WorkflowConstants.STATUS_DENIED;
