@@ -2,18 +2,12 @@ package br.com.abware.jcondo.core.model;
 
 import java.util.List;
 
-public class Member extends Person {
-
-	private Flat home;
+public class Homeowner extends Resident {
 	
 	private List<Flat> flats;
 	
-	public Flat getHome() {
-		return home;
-	}
-
-	public void setHome(Flat home) {
-		this.home = home;
+	public Homeowner() {
+		super();
 	}
 
 	public List<Flat> getFlats() {

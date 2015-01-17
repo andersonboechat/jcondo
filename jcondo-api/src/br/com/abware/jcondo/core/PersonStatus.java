@@ -2,8 +2,10 @@ package br.com.abware.jcondo.core;
 
 public enum PersonStatus {
 
-	ATIVO;
-	
+	ACTIVE,
+	INACTIVE,
+	DELETED;
+
 	public static PersonStatus parseStatus(int status) {
 		return null;
 	}

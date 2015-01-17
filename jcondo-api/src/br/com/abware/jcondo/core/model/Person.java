@@ -5,7 +5,6 @@ import java.util.List;
 
 import br.com.abware.jcondo.core.Gender;
 import br.com.abware.jcondo.core.PersonStatus;
-import br.com.abware.jcondo.core.Organization;
 
 public class Person implements BaseModel {
 
@@ -27,11 +26,7 @@ public class Person implements BaseModel {
 	
 	private PersonStatus status;
 	
-	private Organization organization;
-	
-	private List<Organization> organizations;
-
-	private List<Roleship> roleships;
+	private List<Role<? extends Domain>> roles;
 	
 	public Person() {
 		this.gender = Gender.MALE;
@@ -109,28 +104,12 @@ public class Person implements BaseModel {
 		this.status = status;
 	}
 
-	public Organization getOrganization() {
-		return organization;
+	public List<Role<? extends Domain>> getRoles() {
+		return roles;
 	}
 
-	public void setOrganization(Organization organization) {
-		this.organization = organization;
-	}
-
-	public List<Organization> getOrganizations() {
-		return organizations;
-	}
-
-	public void setOrganizations(List<Organization> organizations) {
-		this.organizations = organizations;
-	}
-
-	public List<Roleship> getRoleships() {
-		return roleships;
-	}
-
-	public void setRoleships(List<Roleship> roleships) {
-		this.roleships = roleships;
+	public void setRoleships(List<Role<? extends Domain>> roles) {
+		this.roles = roles;
 	}
 
 }

@@ -1,15 +1,12 @@
 package br.com.abware.jcondo.core.model;
 
-import br.com.abware.jcondo.core.RoleType;
+public abstract class Role<D extends Domain> implements BaseModel {
 
-public class Role implements BaseModel {
-
-	private long id;
+	protected long id;
 	
-	private String title;
+	protected String title;
 	
-	private RoleType type;
-
+	protected D domain;
 
 	public long getId() {
 		return id;
@@ -27,8 +24,12 @@ public class Role implements BaseModel {
 		this.title = name;
 	}
 
-	public RoleType getType() {
-		return type;
+	public D getDomain() {
+		return domain;
+	}
+
+	public void setDomain(D domain) {
+		this.domain = domain;
 	}
 
 }
