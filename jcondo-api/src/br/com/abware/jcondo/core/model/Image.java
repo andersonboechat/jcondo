@@ -30,17 +30,28 @@ public class Image implements BaseModel {
 		this.id = id;
 	}
 
-
 	public String getPath() {
 		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 	public String getTitle() {
 		return title;
 	}
 
-	public String getDescription() {
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescrption() {
 		return descrption;
+	}
+
+	public void setDescrption(String descrption) {
+		this.descrption = descrption;
 	}
 	
 }

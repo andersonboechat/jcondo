@@ -11,5 +11,9 @@ public interface FlatService extends BaseService<Flat> {
 	public List<Flat> getFlats() throws BusinessException;
 	
 	public List<Flat> getFlats(Person person) throws BusinessException;
-	
+
+	public List<Integer> getBlocks();
+
+	public List<Integer> getNumbers();
+
 }

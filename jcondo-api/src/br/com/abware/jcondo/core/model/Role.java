@@ -1,13 +1,24 @@
 package br.com.abware.jcondo.core.model;
 
-public abstract class Role<D extends Domain> implements BaseModel {
+public class Role implements BaseModel {
 
 	protected long id;
-	
-	protected String title;
-	
-	protected D domain;
 
+	protected RoleName name;
+
+	protected String title;
+
+	public Role() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Role(long id, RoleName name, String title) {
+		this();
+		this.id = id;
+		this.name = name;
+		this.title = title;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -16,20 +27,20 @@ public abstract class Role<D extends Domain> implements BaseModel {
 		this.id = id;
 	}
 
+	public RoleName getName() {
+		return name;
+	}
+
+	public void setName(RoleName name) {
+		this.name = name;
+	}
+
 	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(String name) {
-		this.title = name;
-	}
-
-	public D getDomain() {
-		return domain;
-	}
-
-	public void setDomain(D domain) {
-		this.domain = domain;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }

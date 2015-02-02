@@ -9,24 +9,26 @@ import br.com.abware.jcondo.core.PersonStatus;
 public class Person implements BaseModel {
 
 	private long id;
-	
+
 	private String lastName;
-	
+
 	private String firstName;
-	
+
 	private String emailAddress;
-	
+
 	private String fullName;
+
+	private String identity;
 	
 	private Date birthday;
-	
+
 	private Gender gender;
 
-	private Image picture;
-	
+	private String picture;
+
 	private PersonStatus status;
-	
-	private List<Role<? extends Domain>> roles;
+
+	private List<Membership> memberships;
 	
 	public Person() {
 		this.gender = Gender.MALE;
@@ -88,11 +90,11 @@ public class Person implements BaseModel {
 		this.gender = gender;
 	}
 
-	public Image getPicture() {
+	public String getPicture() {
 		return picture;
 	}
 
-	public void setPicture(Image picture) {
+	public void setPicture(String picture) {
 		this.picture = picture;
 	}
 
@@ -104,12 +106,21 @@ public class Person implements BaseModel {
 		this.status = status;
 	}
 
-	public List<Role<? extends Domain>> getRoles() {
-		return roles;
+	public List<Membership> getMemberships() {
+		return memberships;
 	}
 
-	public void setRoleships(List<Role<? extends Domain>> roles) {
-		this.roles = roles;
+	public void setMemberships(List<Membership> memberships) {
+		this.memberships = memberships;
+	}
+
+	public Role getRole(Domain domain) {
+		for (Membership m : memberships) {
+			if (m.getDomain().equals(domain)) {
+				return m.getRole();
+			}
+		}
+		return null;
 	}
 
 }
