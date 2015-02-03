@@ -5,33 +5,30 @@ import java.util.List;
 
 import br.com.abware.jcondo.core.Gender;
 import br.com.abware.jcondo.core.PersonStatus;
-import br.com.abware.jcondo.core.Organization;
 
 public class Person implements BaseModel {
 
 	private long id;
-	
+
 	private String lastName;
-	
+
 	private String firstName;
-	
+
 	private String emailAddress;
-	
+
 	private String fullName;
+
+	private String identity;
 	
 	private Date birthday;
-	
+
 	private Gender gender;
 
-	private Image picture;
-	
-	private PersonStatus status;
-	
-	private Organization organization;
-	
-	private List<Organization> organizations;
+	private String picture;
 
-	private List<Roleship> roleships;
+	private PersonStatus status;
+
+	private List<Membership> memberships;
 	
 	public Person() {
 		this.gender = Gender.MALE;
@@ -93,11 +90,11 @@ public class Person implements BaseModel {
 		this.gender = gender;
 	}
 
-	public Image getPicture() {
+	public String getPicture() {
 		return picture;
 	}
 
-	public void setPicture(Image picture) {
+	public void setPicture(String picture) {
 		this.picture = picture;
 	}
 
@@ -109,28 +106,21 @@ public class Person implements BaseModel {
 		this.status = status;
 	}
 
-	public Organization getOrganization() {
-		return organization;
+	public List<Membership> getMemberships() {
+		return memberships;
 	}
 
-	public void setOrganization(Organization organization) {
-		this.organization = organization;
+	public void setMemberships(List<Membership> memberships) {
+		this.memberships = memberships;
 	}
 
-	public List<Organization> getOrganizations() {
-		return organizations;
-	}
-
-	public void setOrganizations(List<Organization> organizations) {
-		this.organizations = organizations;
-	}
-
-	public List<Roleship> getRoleships() {
-		return roleships;
-	}
-
-	public void setRoleships(List<Roleship> roleships) {
-		this.roleships = roleships;
+	public Role getRole(Domain domain) {
+		for (Membership m : memberships) {
+			if (m.getDomain().equals(domain)) {
+				return m.getRole();
+			}
+		}
+		return null;
 	}
 
 }

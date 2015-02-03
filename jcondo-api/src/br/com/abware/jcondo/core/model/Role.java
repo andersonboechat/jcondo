@@ -1,16 +1,24 @@
 package br.com.abware.jcondo.core.model;
 
-import br.com.abware.jcondo.core.RoleType;
-
 public class Role implements BaseModel {
 
-	private long id;
-	
-	private String title;
-	
-	private RoleType type;
+	protected long id;
 
+	protected RoleName name;
 
+	protected String title;
+
+	public Role() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Role(long id, RoleName name, String title) {
+		this();
+		this.id = id;
+		this.name = name;
+		this.title = title;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -19,16 +27,20 @@ public class Role implements BaseModel {
 		this.id = id;
 	}
 
+	public RoleName getName() {
+		return name;
+	}
+
+	public void setName(RoleName name) {
+		this.name = name;
+	}
+
 	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(String name) {
-		this.title = name;
-	}
-
-	public RoleType getType() {
-		return type;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }

@@ -8,7 +8,7 @@ import br.com.abware.jcondo.core.model.Image;
 
 public class Room implements Bookable, BaseModel {
 
-	private int id;
+	private long id;
 	
 	private long imageFolderId;
 
@@ -24,11 +24,11 @@ public class Room implements Bookable, BaseModel {
 	
 	private List<Image> images;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

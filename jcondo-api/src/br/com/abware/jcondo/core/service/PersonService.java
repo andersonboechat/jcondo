@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import br.com.abware.jcondo.core.Permission;
-import br.com.abware.jcondo.core.model.Flat;
+import br.com.abware.jcondo.core.model.Domain;
 import br.com.abware.jcondo.core.model.Person;
 import br.com.abware.jcondo.exception.ApplicationException;
 
@@ -14,7 +14,7 @@ public interface PersonService extends BaseService<Person> {
 	
 	public Person getPerson() throws ApplicationException;
 	
-	public List<Person> getPeople(Flat flat) throws ApplicationException;
+	public List<Person> getPeople(Domain domain) throws ApplicationException;
 	
 	public void setPortrait(File file);
 	

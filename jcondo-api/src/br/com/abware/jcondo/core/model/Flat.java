@@ -1,29 +1,49 @@
 package br.com.abware.jcondo.core.model;
 
-import br.com.abware.jcondo.core.Organization;
+public class Flat extends Domain {
 
-
-public class Flat extends Organization implements BaseModel {
+	private long block;
 	
-	private long id;
+	private long number;
 	
-	private String name;
-
-	public long getId() {
-		return id;
+	public Flat() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setId(long id) {
+	public Flat(long id, long block, long number) {
+		this();
 		this.id = id;
+		this.block = block;
+		this.number = number;
 	}
 
-	public String getName() {
-		return name;
+	public boolean equals(Object obj) {
+		return super.equals(obj) || (block == ((Flat) obj).getBlock() && number == ((Flat) obj).getNumber());
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("{id: ").append(id).append(", block:").append(block).append(", number:").append(number).append("}");
+		return sb.toString();
 	}
+	
+	public long getBlock() {
+		return block;
+	}
+
+	public void setBlock(long block) {
+		this.block = block;
+	}
+
+	public long getNumber() {
+		return number;
+	}
+
+	public void setNumber(long number) {
+		this.number = number;
+	}
+	
 	
 
 }
