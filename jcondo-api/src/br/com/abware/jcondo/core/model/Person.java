@@ -1,6 +1,5 @@
 package br.com.abware.jcondo.core.model;
 
-import java.util.Date;
 import java.util.List;
 
 import br.com.abware.jcondo.core.Gender;
@@ -9,22 +8,20 @@ import br.com.abware.jcondo.core.PersonStatus;
 public class Person implements BaseModel {
 
 	private long id;
-
-	private String lastName;
+	
+	private long userId;
 
 	private String firstName;
 
-	private String emailAddress;
+	private String lastName;
 
-	private String fullName;
+	private String emailAddress;
 
 	private String identity;
 	
-	private Date birthday;
-
 	private Gender gender;
 
-	private String picture;
+	private Image picture;
 
 	private PersonStatus status;
 
@@ -40,6 +37,14 @@ public class Person implements BaseModel {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 	public String getLastName() {
@@ -66,20 +71,12 @@ public class Person implements BaseModel {
 		this.emailAddress = emailAddress;
 	}
 
-	public String getFullName() {
-		return fullName;
+	public String getIdentity() {
+		return identity;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
+	public void setIdentity(String identity) {
+		this.identity = identity;
 	}
 
 	public Gender getGender() {
@@ -90,11 +87,11 @@ public class Person implements BaseModel {
 		this.gender = gender;
 	}
 
-	public String getPicture() {
+	public Image getPicture() {
 		return picture;
 	}
 
-	public void setPicture(String picture) {
+	public void setPicture(Image picture) {
 		this.picture = picture;
 	}
 
