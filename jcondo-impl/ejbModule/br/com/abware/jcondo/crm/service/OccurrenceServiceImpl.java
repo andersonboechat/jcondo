@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 
 import br.com.abware.jcondo.core.model.Person;
 import br.com.abware.jcondo.core.persistence.PersonManager;
+import br.com.abware.jcondo.crm.model.Answer;
 import br.com.abware.jcondo.crm.model.Occurrence;
 import br.com.abware.jcondo.crm.persistence.OccurrenceManager;
 import br.com.abware.jcondo.exception.ApplicationException;
@@ -42,7 +43,28 @@ public class OccurrenceServiceImpl implements OccurrenceService {
 
 	@Override
 	public Occurrence register(Occurrence occurrence) throws ApplicationException {
+	 	
+		if (occurrenceManager.findById(occurrence.getId()) != null) {
+			// TODO throw business exception. occurrence can not be updated
+		}
+
+		// TODO: verificar se a pessoa que esta fazendo a ocorrencia é um morador
+		
 		return occurrenceManager.save(occurrence);
 	}
 
+	public Occurrence register(Answer answer) throws ApplicationException {
+		// TODO: verificar se a resposta já foi fornecida
+
+		
+		return occurrenceManager.save(occurrence);
+	}
+
+	public Occurrence saveAsDraft(Answer answer) throws ApplicationException {
+		// TODO: verificar se a resposta já foi finalizada
+
+		return occurrenceManager.save(answer);
+	}
+	
+	
 }

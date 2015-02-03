@@ -17,14 +17,10 @@ public abstract class AbstractManager<Entity extends PersistedModel, Model exten
 
 	protected abstract Entity getEntity(Model model) throws PersistenceException;
 	
-	public Model getModel(Entity entity) throws PersistenceException {
-		try {
-			Model model = getModelClass().newInstance();
-			BeanUtils.copyProperties(model, entity);
-			return model;
-		} catch (Exception e) {
-			throw new PersistenceException("", e);
-		}
+	public Model getModel(Entity entity) throws Exception {
+		Model model = getModelClass().newInstance();
+		BeanUtils.copyProperties(model, entity);
+		return model;
 	}
 
 	protected List<Model> getModels(List<Entity> entities) throws PersistenceException {
@@ -37,7 +33,7 @@ public abstract class AbstractManager<Entity extends PersistedModel, Model exten
 
 			return models;
 		} catch (Exception e) {
-			throw new PersistenceException("", e);
+			throw new PersistenceException(e, "");
 		}		
 	}
 

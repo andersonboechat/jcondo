@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.liferay.portal.service.RoleLocalServiceUtil;
 
-import br.com.abware.jcondo.core.RoleType;
+import br.com.abware.jcondo.core.DomainType;
 import br.com.abware.jcondo.core.model.Role;
 import br.com.abware.jcondo.core.persistence.RoleManager;
 import br.com.abware.jcondo.exception.PersistenceException;
@@ -29,7 +29,7 @@ public class RoleManagerImpl extends AbstractManager<com.liferay.portal.model.Ro
 	}
 
 	@Override
-	public List<Role> findByRoleType(RoleType type) throws PersistenceException {
+	public List<Role> findByRoleType(DomainType type) throws PersistenceException {
 		try {
 			return getModels(RoleLocalServiceUtil.getRoles(type.ordinal(), null));
 		} catch (Exception e) {

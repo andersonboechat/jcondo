@@ -6,10 +6,10 @@ import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
-import br.com.abware.jcondo.core.BaseRole;
 import br.com.abware.jcondo.core.model.Flat;
 import br.com.abware.jcondo.core.model.Person;
 import br.com.abware.jcondo.core.persistence.FlatManager;
+import br.com.abware.jcondo.exception.BusinessException;
 import br.com.abware.jcondo.exception.PersistenceException;
 
 @Stateless(name="flatService")
@@ -19,18 +19,12 @@ public class FlatServiceImpl implements FlatService {
 	@EJB
 	private FlatManager flatManager;
 	
-	@Override
-	public List<BaseRole> getRoles() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Flat> getFlats() throws PersistenceException {
+	public List<Flat> getFlats() throws BusinessException {
 		return flatManager.findAll();
 	}
 	
 	@Override
-	public List<Flat> getFlats(Person person) throws PersistenceException {
+	public List<Flat> getFlats(Person person) throws BusinessException {
 		return flatManager.findByPerson(person);
 	}
 
