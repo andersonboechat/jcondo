@@ -1,26 +1,45 @@
 package br.com.abware.jcondo.core.model;
 
-public class Membership {
+import br.com.abware.jcondo.core.PersonType;
 
-	protected Role role;
+public class Membership implements BaseModel {
+
+	protected PersonType type;
 	
 	protected Domain domain;
 	
 	public Membership() {
 	}
 
-	public Membership(Role role, Domain domain) {
+	public Membership(PersonType type, Domain domain) {
 		this();
-		this.role = role;
+		this.type = type;
 		this.domain = domain;
 	}
-	
-	public Role getRole() {
-		return role;
+
+	@Override
+	public boolean equals(Object obj) {
+		return obj != null && (super.equals(obj) || 
+							   (((Membership) obj).getDomain().equals(domain) && ((Membership) obj).getType().equals(type)));
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("{domain:").append(domain).append(", type:").append(type).append("}");
+		return super.toString();
+	}
+	
+	public long getId() {
+		return 0;
+	}	
+
+	public PersonType getType() {
+		return type;
+	}
+
+	public void setType(PersonType type) {
+		this.type = type;
 	}
 
 	public Domain getDomain() {
@@ -29,5 +48,6 @@ public class Membership {
 
 	public void setDomain(Domain domain) {
 		this.domain = domain;
-	}	
+	}
+
 }

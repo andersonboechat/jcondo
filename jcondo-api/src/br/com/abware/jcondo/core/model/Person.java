@@ -111,13 +111,4 @@ public class Person implements BaseModel {
 		this.memberships = memberships;
 	}
 
-	public Role getRole(Domain domain) {
-		for (Membership m : memberships) {
-			if (m.getDomain().equals(domain)) {
-				return m.getRole();
-			}
-		}
-		return null;
-	}
-
 }
