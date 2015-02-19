@@ -11,6 +11,8 @@ public class Person implements BaseModel {
 	
 	private long userId;
 
+	private String fullName;
+	
 	private String firstName;
 
 	private String lastName;
@@ -30,7 +32,20 @@ public class Person implements BaseModel {
 	public Person() {
 		this.gender = Gender.MALE;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return obj != null && (super.equals(obj) || ((Person) obj).getId() == id || ((Person) obj).getIdentity().equals(identity));
+	}
 	
+	@Override
+	public int hashCode() {
+        long hash = 7;
+        hash = 31 * hash + id;
+        hash = 31 * hash + (null == identity ? 0 : identity.hashCode());
+        return (int) hash;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -45,6 +60,14 @@ public class Person implements BaseModel {
 
 	public void setUserId(long userId) {
 		this.userId = userId;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
 	public String getLastName() {

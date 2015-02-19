@@ -4,9 +4,11 @@ import br.com.abware.jcondo.core.PersonType;
 
 public class Membership implements BaseModel {
 
-	protected PersonType type;
+	private long id;
 	
-	protected Domain domain;
+	private PersonType type;
+	
+	private Domain domain;
 	
 	public Membership() {
 	}
@@ -30,8 +32,12 @@ public class Membership implements BaseModel {
 		return super.toString();
 	}
 	
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public long getId() {
-		return 0;
+		return this.id;
 	}	
 
 	public PersonType getType() {
