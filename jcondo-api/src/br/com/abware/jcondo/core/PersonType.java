@@ -1,6 +1,8 @@
 package br.com.abware.jcondo.core;
 
-public enum PersonType {
+import br.com.abware.jcondo.core.model.BaseModel;
+
+public enum PersonType implements BaseModel {
 
 	OWNER("person.type.owner"),
 	RENTER("person.type.renter"),
@@ -33,6 +35,11 @@ public enum PersonType {
 
 	public String getLabel() {
 		return label;
+	}
+
+	@Override
+	public long getId() {
+		return this.ordinal();
 	}
 
 }
