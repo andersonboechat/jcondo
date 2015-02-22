@@ -1,6 +1,5 @@
 package br.com.abware.jcondo.core.model;
 
-import java.util.Date;
 import java.util.List;
 
 import br.com.abware.jcondo.core.Gender;
@@ -9,22 +8,22 @@ import br.com.abware.jcondo.core.PersonStatus;
 public class Person implements BaseModel {
 
 	private long id;
+	
+	private long userId;
+
+	private String fullName;
+	
+	private String firstName;
 
 	private String lastName;
 
-	private String firstName;
-
 	private String emailAddress;
-
-	private String fullName;
 
 	private String identity;
 	
-	private Date birthday;
-
 	private Gender gender;
 
-	private String picture;
+	private Image picture;
 
 	private PersonStatus status;
 
@@ -33,13 +32,42 @@ public class Person implements BaseModel {
 	public Person() {
 		this.gender = Gender.MALE;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return obj != null && (super.equals(obj) || ((Person) obj).getId() == id || ((Person) obj).getIdentity().equals(identity));
+	}
 	
+	@Override
+	public int hashCode() {
+        long hash = 7;
+        hash = 31 * hash + id;
+        hash = 31 * hash + (null == identity ? 0 : identity.hashCode());
+        return (int) hash;
+	}
+
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
 	public String getLastName() {
@@ -66,20 +94,12 @@ public class Person implements BaseModel {
 		this.emailAddress = emailAddress;
 	}
 
-	public String getFullName() {
-		return fullName;
+	public String getIdentity() {
+		return identity;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
+	public void setIdentity(String identity) {
+		this.identity = identity;
 	}
 
 	public Gender getGender() {
@@ -90,11 +110,11 @@ public class Person implements BaseModel {
 		this.gender = gender;
 	}
 
-	public String getPicture() {
+	public Image getPicture() {
 		return picture;
 	}
 
-	public void setPicture(String picture) {
+	public void setPicture(Image picture) {
 		this.picture = picture;
 	}
 
@@ -112,15 +132,6 @@ public class Person implements BaseModel {
 
 	public void setMemberships(List<Membership> memberships) {
 		this.memberships = memberships;
-	}
-
-	public Role getRole(Domain domain) {
-		for (Membership m : memberships) {
-			if (m.getDomain().equals(domain)) {
-				return m.getRole();
-			}
-		}
-		return null;
 	}
 
 }

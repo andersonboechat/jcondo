@@ -11,7 +11,7 @@ import br.com.abware.jcondo.exception.ApplicationException;
 
 public interface RoomBookingService extends BaseService<RoomBooking> {
 
-	public static final int CANCEL_BOOKING_DEADLINE = 7;
+	public static final int BOOKING_CANCEL_DEADLINE = 7;
 
 	public static final String DATETIME_FORMAT = "dd/MM/yyyy HH:mm";
 
@@ -25,6 +25,8 @@ public interface RoomBookingService extends BaseService<RoomBooking> {
 
 	public boolean exists(RoomBooking booking) throws ApplicationException;
 
+	public List<RoomBooking> getBookings(Room room, Date fromDate, Date toDate) throws ApplicationException;
+	
 	public List<RoomBooking> getBookings(Date fromDate, Date toDate) throws ApplicationException;
 
 	public List<RoomBooking> getBookings(int month, int year) throws ApplicationException;

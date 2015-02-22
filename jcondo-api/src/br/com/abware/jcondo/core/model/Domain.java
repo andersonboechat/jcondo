@@ -4,12 +4,22 @@ public class Domain implements BaseModel {
 
 	protected long id;
 	
+	protected long relatedId;
+	
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public long getRelatedId() {
+		return relatedId;
+	}
+
+	public void setRelatedId(long domainId) {
+		this.relatedId = domainId;
 	}
 
 	public boolean equals(Object obj) {

@@ -2,41 +2,39 @@ package br.com.abware.jcondo.core.model;
 
 public enum RoleName {
 
-	OWNER("Flat Owner", 0),
-	RENTER("Flat Renter", 0),
-	RESIDENT("Flat Resident", 0),
-	DEPENDENT("Flat Dependent", 0),
+	ADMIN_MANAGER("Administration Manager"),
+	ADMIN_ASSISTANT("Administration Assistant"),
+	ADMIN_MEMBER("Administration Member"),
 
-	THIRD_PARTY("Third Party", 1),
-	EMPLOYEE("Employee", 1),
+	SUPPLIER_MANAGER("Supplier Manager"),
 
-	GUEST("Guest", 2),
-	VISITOR("Visitor", 2),
+	FLAT_MANAGER("Flat Manager"),
+	FLAT_ASSISTANT("Flat Assistant"),
+	FLAT_MEMBER("Flat Member"),
 
-	LESSEE("Room Lessee", 2),
-	DEBATER("Forum Debater", 2),
-	HABITANT("Condominium Habitant", 2);
+	SITE_ADMIN("Site Administrator"),
+	SITE_MEMBER("Site Member"),
 
+	SENIOR_USER("Senior User"),
+	REGULAR_USER("Regular User"),
+	JUNIOR_USER("Junior User"),
+
+	GUEST("Guest"),
+	VISITOR("Visitor");
+	
 	private String label;
 
-	private int type;
-
-	private RoleName(String label, int type) {
+	private RoleName(String label) {
 		this.label = label;
-		this.type = type;
 	}
 
 	public String getLabel() {
 		return label;
 	}
 
-	public int getType() {
-		return type;
-	}
-
-	public static RoleName parse(String name) {
+	public static RoleName parse(String label) {
 		for (RoleName roleName : values()) {
-			if (roleName.getLabel().equalsIgnoreCase(name)) {
+			if (roleName.getLabel().equalsIgnoreCase(label)) {
 				return roleName;
 			}
 		}

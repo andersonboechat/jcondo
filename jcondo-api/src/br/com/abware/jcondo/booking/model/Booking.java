@@ -3,6 +3,7 @@ package br.com.abware.jcondo.booking.model;
 import java.util.Date;
 
 import br.com.abware.jcondo.core.model.BaseModel;
+import br.com.abware.jcondo.core.model.Flat;
 import br.com.abware.jcondo.core.model.Person;
 
 public class Booking<Resource extends Bookable> implements BaseModel {
@@ -10,6 +11,8 @@ public class Booking<Resource extends Bookable> implements BaseModel {
 	private long id;
 	
 	private Person person;
+	
+	private Flat flat;
 
 	private Resource resource;
 
@@ -45,6 +48,14 @@ public class Booking<Resource extends Bookable> implements BaseModel {
 
 	public void setPerson(Person person) {
 		this.person = person;
+	}
+
+	public Flat getFlat() {
+		return flat;
+	}
+
+	public void setFlat(Flat flat) {
+		this.flat = flat;
 	}
 
 	public Resource getResource() {

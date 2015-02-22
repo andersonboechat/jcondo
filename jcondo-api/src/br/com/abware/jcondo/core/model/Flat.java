@@ -2,15 +2,15 @@ package br.com.abware.jcondo.core.model;
 
 public class Flat extends Domain {
 
-	private long block;
+	private int block;
 	
-	private long number;
+	private int number;
 	
 	public Flat() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Flat(long id, long block, long number) {
+	public Flat(long id, int block, int number) {
 		this();
 		this.id = id;
 		this.block = block;
@@ -28,19 +28,19 @@ public class Flat extends Domain {
 		return sb.toString();
 	}
 	
-	public long getBlock() {
+	public int getBlock() {
 		return block;
 	}
 
-	public void setBlock(long block) {
+	public void setBlock(int block) {
 		this.block = block;
 	}
 
-	public long getNumber() {
+	public int getNumber() {
 		return number;
 	}
 
-	public void setNumber(long number) {
+	public void setNumber(int number) {
 		this.number = number;
 	}
 	

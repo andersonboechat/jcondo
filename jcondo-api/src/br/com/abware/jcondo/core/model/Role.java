@@ -19,6 +19,11 @@ public class Role implements BaseModel {
 		this.title = title;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		return obj != null && (super.equals(obj) || id == ((Role) obj).getId() || name == ((Role) obj).getName());
+	}
+	
 	public long getId() {
 		return id;
 	}
