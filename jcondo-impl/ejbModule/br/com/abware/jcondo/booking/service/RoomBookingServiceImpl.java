@@ -88,12 +88,12 @@ public class RoomBookingServiceImpl implements RoomBookingService {
 	public RoomBooking book(RoomBooking booking) throws ApplicationException {
 		// Validating booking data
 		Date date = new Date(); 
-		if (DateUtils.truncatedCompareTo(date, booking.getDateIn(), Calendar.DAY_OF_YEAR) > 0) {
+		if (date.after(booking.getDateIn())) {
 			String dateIn = DateFormatUtils.format(booking.getDateIn(), RoomBookingServiceImpl.DATETIME_FORMAT);
 			throw new InvalidBookingException(ExceptionMessage.PAST_DATE, dateIn);
 		}
 
-		if (DateUtils.truncatedCompareTo(booking.getDateOut(), booking.getDateIn(), Calendar.DAY_OF_YEAR) < 0) {
+		if (booking.getDateOut().before(booking.getDateIn())) {
 			String dateIn = DateFormatUtils.format(booking.getDateIn(), RoomBookingServiceImpl.DATETIME_FORMAT);
 			String dateOut = DateFormatUtils.format(booking.getDateOut(), RoomBookingServiceImpl.DATETIME_FORMAT);
 			throw new InvalidBookingException(ExceptionMessage.INVALID_DATE_RANGE, dateIn, dateOut);
@@ -119,8 +119,8 @@ public class RoomBookingServiceImpl implements RoomBookingService {
 									   booking.getResource().getName(), dateIn, hourIn, hourOut);
 		}
 
-		Date bkgMinHour = DateUtils.setHours(date, RoomBookingService.BKG_MIN_HOUR);
-		Date bkgMaxHour = DateUtils.setHours(date, RoomBookingService.BKG_MAX_HOUR);
+		Date bkgMinHour = DateUtils.setHours(date, BKG_MIN_HOUR);
+		Date bkgMaxHour = DateUtils.setHours(date, BKG_MAX_HOUR);
 
 		if (DateUtils.truncatedCompareTo(booking.getDateIn(), bkgMinHour, Calendar.HOUR_OF_DAY) < 0 ||
 				DateUtils.truncatedCompareTo(booking.getDateOut(), bkgMaxHour, Calendar.HOUR_OF_DAY) > 0) {
@@ -141,10 +141,10 @@ public class RoomBookingServiceImpl implements RoomBookingService {
 	@Override
 	public void cancel(RoomBooking booking) throws ApplicationException {
 		Date now = new Date();
-		Date deadlineDate = DateUtils.addDays(booking.getDateIn(), -CANCEL_BOOKING_DEADLINE);
+		Date deadlineDate = DateUtils.addDays(booking.getDateIn(), -BOOKING_CANCEL_DEADLINE);
 
 		if (DateUtils.truncatedCompareTo(now, deadlineDate, Calendar.DAY_OF_YEAR) > 0) {
-			throw new BookingException(ExceptionMessage.CANCEL_DEADLINE_EXCEEDED, RoomBookingServiceImpl.CANCEL_BOOKING_DEADLINE);
+			throw new BookingException(ExceptionMessage.CANCEL_DEADLINE_EXCEEDED, BOOKING_CANCEL_DEADLINE);
 		}
 
 		booking.setStatus(BookingStatus.CANCELLED);
