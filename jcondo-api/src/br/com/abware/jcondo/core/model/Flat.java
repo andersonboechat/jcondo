@@ -17,10 +17,20 @@ public class Flat extends Domain {
 		this.number = number;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj) || (block == ((Flat) obj).getBlock() && number == ((Flat) obj).getNumber());
 	}
 
+	@Override
+	public int hashCode() {
+        long hash = 7;
+        hash = 31 * hash + id;
+        hash = 31 * hash + block;
+        hash = 31 * hash + number;
+        return (int) hash;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
