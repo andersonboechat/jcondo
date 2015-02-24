@@ -35,7 +35,7 @@ public class Person implements BaseModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj != null && (super.equals(obj) || ((Person) obj).getId() == id || ((Person) obj).getIdentity().equals(identity));
+		return obj != null && (super.equals(obj) || (obj instanceof Person && ((Person) obj).getId() == id || ((Person) obj).getIdentity().equals(identity)));
 	}
 	
 	@Override
@@ -44,6 +44,16 @@ public class Person implements BaseModel {
         hash = 31 * hash + id;
         hash = 31 * hash + (null == identity ? 0 : identity.hashCode());
         return (int) hash;
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("{id: ").append(id).append(", userId:").append(userId)
+		  .append(", firstName:").append(firstName).append(", lastName:").append(lastName)
+		  .append(", email:").append(emailAddress).append(", identity:").append(identity)
+		  .append(", status:").append(status).append(", memberships:").append(memberships).append("}");
+		return sb.toString();
 	}
 
 	public long getId() {

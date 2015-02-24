@@ -19,7 +19,7 @@ public class Flat extends Domain {
 
 	@Override
 	public boolean equals(Object obj) {
-		return super.equals(obj) || (block == ((Flat) obj).getBlock() && number == ((Flat) obj).getNumber());
+		return obj != null && (super.equals(obj) || (obj instanceof Flat && block == ((Flat) obj).getBlock() && number == ((Flat) obj).getNumber()));
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class Flat extends Domain {
         hash = 31 * hash + number;
         return (int) hash;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();

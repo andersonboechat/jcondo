@@ -22,7 +22,15 @@ public class Membership implements BaseModel {
 	@Override
 	public boolean equals(Object obj) {
 		return obj != null && (super.equals(obj) || 
-							   (((Membership) obj).getDomain().equals(domain) && ((Membership) obj).getType().equals(type)));
+			  (obj instanceof Membership && ((Membership) obj).getDomain().equals(domain) && ((Membership) obj).getType().equals(type)));
+	}
+
+	@Override
+	public int hashCode() {
+        long hash = 7;
+        hash = 31 * hash + (null == type ? 0 : type.hashCode());
+        hash = 31 * hash + (null == domain ? 0 : domain.hashCode());
+        return (int) hash;
 	}
 
 	@Override

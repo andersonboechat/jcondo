@@ -23,6 +23,6 @@ public class Domain implements BaseModel {
 	}
 
 	public boolean equals(Object obj) {
-		return obj != null && (super.equals(obj) || id == ((Domain) obj).getId());
+		return super.equals(obj) || (this.getClass().equals(obj.getClass()) && id == ((Domain) obj).getId());
 	}
 }
