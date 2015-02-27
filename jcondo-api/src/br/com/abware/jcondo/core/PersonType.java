@@ -25,7 +25,7 @@ public enum PersonType implements BaseModel {
 	
 	public static PersonType[] SUPPLIER_TYPES = {MANAGER, EMPLOYEE};
 
-	public static PersonType[] ADMIN_TYPES = {SYNCDIC, SUB_SYNCDIC, ADMIN_ADVISOR, TAX_ADVISOR, EMPLOYEE};
+	public static PersonType[] ADMIN_TYPES = {SYNCDIC, SUB_SYNCDIC, ADMIN_ASSISTANT, ADMIN_ADVISOR, TAX_ADVISOR, EMPLOYEE, VISITOR};
 	
 	private String label;
 
