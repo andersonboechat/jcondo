@@ -4,24 +4,20 @@ public class Domain implements BaseModel {
 
 	protected long id;
 
-	protected long parentId;
-	
 	protected long relatedId;
 	
+	protected Domain parent;
+
+	public boolean equals(Object obj) {
+		return super.equals(obj) || (this.getClass().equals(obj.getClass()) && id == ((Domain) obj).getId());
+	}
+
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public long getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(long parentId) {
-		this.parentId = parentId;
 	}
 
 	public long getRelatedId() {
@@ -32,7 +28,11 @@ public class Domain implements BaseModel {
 		this.relatedId = domainId;
 	}
 
-	public boolean equals(Object obj) {
-		return super.equals(obj) || (this.getClass().equals(obj.getClass()) && id == ((Domain) obj).getId());
+	public Domain getParent() {
+		return parent;
+	}
+
+	public void setParent(Domain parent) {
+		this.parent = parent;
 	}
 }
