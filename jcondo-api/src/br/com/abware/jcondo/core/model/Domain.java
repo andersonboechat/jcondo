@@ -3,6 +3,8 @@ package br.com.abware.jcondo.core.model;
 public class Domain implements BaseModel {
 
 	protected long id;
+
+	protected long parentId;
 	
 	protected long relatedId;
 	
@@ -12,6 +14,14 @@ public class Domain implements BaseModel {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(long parentId) {
+		this.parentId = parentId;
 	}
 
 	public long getRelatedId() {
