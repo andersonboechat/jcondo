@@ -6,6 +6,8 @@ public class Domain implements BaseModel {
 
 	protected long relatedId;
 	
+	protected long folderId;	
+	
 	protected Domain parent;
 
 	public boolean equals(Object obj) {
@@ -28,6 +30,14 @@ public class Domain implements BaseModel {
 		this.relatedId = domainId;
 	}
 
+	public long getFolderId() {
+		return folderId;
+	}
+
+	public void setFolderId(long forderId) {
+		this.folderId = forderId;
+	}
+
 	public Domain getParent() {
 		return parent;
 	}
@@ -35,4 +45,5 @@ public class Domain implements BaseModel {
 	public void setParent(Domain parent) {
 		this.parent = parent;
 	}
+
 }
