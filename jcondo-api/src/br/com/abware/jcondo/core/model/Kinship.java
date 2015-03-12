@@ -15,9 +15,25 @@ public class Kinship implements BaseModel {
 	}
 
 	public Kinship(Person person, Person relative, KinType type) {
+		this.person = person;
 		this.relative = relative;
 		this.type = type;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return obj != null && (super.equals(obj) || 
+			  (obj instanceof Kinship && ((Kinship) obj).getPerson().equals(person) && ((Kinship) obj).getRelative().equals(relative)) && ((Kinship) obj).getType().equals(type));
+	}
+
+	@Override
+	public int hashCode() {
+        long hash = 7;
+        hash = 31 * hash + (null == person ? 0 : person.hashCode());
+        hash = 31 * hash + (null == relative ? 0 : relative.hashCode());
+        hash = 31 * hash + (null == type ? 0 : type.hashCode());
+        return (int) hash;
+	}	
 
 	public long getId() {
 		return id;
