@@ -1,5 +1,6 @@
 package br.com.abware.jcondo.core.model;
 
+import java.sql.Date;
 import java.util.List;
 
 import br.com.abware.jcondo.core.Gender;
@@ -27,8 +28,10 @@ public class Person implements BaseModel {
 
 	private PersonStatus status;
 
-	private List<Membership> memberships;
+	private Date birthday;
 	
+	private List<Membership> memberships;
+
 	public Person() {
 		this.gender = Gender.MALE;
 	}
@@ -134,6 +137,14 @@ public class Person implements BaseModel {
 
 	public void setStatus(PersonStatus status) {
 		this.status = status;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 	public List<Membership> getMemberships() {
