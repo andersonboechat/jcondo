@@ -4,14 +4,17 @@ public class Phone implements BaseModel {
 
 	private long id;
 
-	private long number;
+	private String extension;
+	
+	private String number;
 
 	private PhoneType type;
 
 	public Phone() {
 	}
 
-	public Phone(long number, PhoneType type) {
+	public Phone(String extension, String number, PhoneType type) {
+		this.extension = extension;
 		this.number = number;
 		this.type = type;
 	}
@@ -24,11 +27,19 @@ public class Phone implements BaseModel {
 		this.id = id;
 	}
 
-	public long getNumber() {
+	public String getExtension() {
+		return extension;
+	}
+
+	public void setExtension(String extension) {
+		this.extension = extension;
+	}
+
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(long number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 
