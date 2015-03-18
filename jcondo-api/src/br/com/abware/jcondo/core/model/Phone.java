@@ -19,6 +19,31 @@ public class Phone implements BaseModel {
 		this.type = type;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return obj != null && (
+					super.equals(obj) || 
+						(obj instanceof Phone && ((Phone) obj).getId() == id || 
+							(((Phone) obj).getExtension().equals(extension) && ((Phone) obj).getNumber().equals(number))));
+	}
+
+	@Override
+	public int hashCode() {
+        long hash = 7;
+        hash = 31 * hash + id;
+        hash = 31 * hash + (null == extension ? 0 : extension.hashCode());
+        hash = 31 * hash + (null == number ? 0 : number.hashCode());
+        return (int) hash;
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("{id: ").append(id).append(", extension:").append(extension)
+		  .append(", number:").append(number).append(", type:").append(type).append("}");
+		return sb.toString();
+	}	
+
 	public long getId() {
 		return id;
 	}
