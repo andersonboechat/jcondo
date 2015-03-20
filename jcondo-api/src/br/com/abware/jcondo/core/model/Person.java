@@ -1,6 +1,6 @@
 package br.com.abware.jcondo.core.model;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import br.com.abware.jcondo.core.Gender;
@@ -38,7 +38,7 @@ public class Person implements BaseModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj != null && (super.equals(obj) || (obj instanceof Person && ((Person) obj).getId() == id || ((Person) obj).getIdentity().equals(identity)));
+		return obj != null && (super.equals(obj) || (obj instanceof Person && ((Person) obj).getIdentity().equals(identity)));
 	}
 	
 	@Override

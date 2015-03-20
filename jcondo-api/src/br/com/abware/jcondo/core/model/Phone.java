@@ -21,10 +21,7 @@ public class Phone implements BaseModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj != null && (
-					super.equals(obj) || 
-						(obj instanceof Phone && ((Phone) obj).getId() == id || 
-							(((Phone) obj).getExtension().equals(extension) && ((Phone) obj).getNumber().equals(number))));
+		return obj != null && (super.equals(obj) ||	(obj instanceof Phone && ((Phone) obj).getExtension().equals(extension) && ((Phone) obj).getNumber().equals(number)));
 	}
 
 	@Override
