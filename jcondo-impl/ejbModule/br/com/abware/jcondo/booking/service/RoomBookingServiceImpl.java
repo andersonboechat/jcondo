@@ -41,10 +41,10 @@ public class RoomBookingServiceImpl implements RoomBookingService {
 	@Override
 	public boolean exists(RoomBooking booking) throws ApplicationException {
 		boolean exists;
-		exists = roomBookingManager.findBooking(booking.getResource(), booking.getDateIn(), 
-									  			booking.getDateOut(), BookingStatus.OPENED) != null;
-		exists = exists || roomBookingManager.findBooking(booking.getResource(), booking.getDateIn(), 
-														  booking.getDateOut(), BookingStatus.PAID) != null;
+		exists = roomBookingManager.findBooking(booking.getResource(), booking.getBeginTime(), 
+									  			booking.getEndTime(), BookingStatus.BOOKED) != null;
+		exists = exists || roomBookingManager.findBooking(booking.getResource(), booking.getBeginTime(), 
+														  booking.getEndTime(), BookingStatus.PAID) != null;
 		return exists; 
 	}
 
@@ -88,14 +88,14 @@ public class RoomBookingServiceImpl implements RoomBookingService {
 	public RoomBooking book(RoomBooking booking) throws ApplicationException {
 		// Validating booking data
 		Date date = new Date(); 
-		if (date.after(booking.getDateIn())) {
-			String dateIn = DateFormatUtils.format(booking.getDateIn(), RoomBookingServiceImpl.DATETIME_FORMAT);
+		if (date.after(booking.getBeginTime())) {
+			String dateIn = DateFormatUtils.format(booking.getBeginTime(), RoomBookingServiceImpl.DATETIME_FORMAT);
 			throw new InvalidBookingException(ExceptionMessage.PAST_DATE, dateIn);
 		}
 
-		if (booking.getDateOut().before(booking.getDateIn())) {
-			String dateIn = DateFormatUtils.format(booking.getDateIn(), RoomBookingServiceImpl.DATETIME_FORMAT);
-			String dateOut = DateFormatUtils.format(booking.getDateOut(), RoomBookingServiceImpl.DATETIME_FORMAT);
+		if (booking.getEndTime().before(booking.getBeginTime())) {
+			String dateIn = DateFormatUtils.format(booking.getBeginTime(), RoomBookingServiceImpl.DATETIME_FORMAT);
+			String dateOut = DateFormatUtils.format(booking.getEndTime(), RoomBookingServiceImpl.DATETIME_FORMAT);
 			throw new InvalidBookingException(ExceptionMessage.INVALID_DATE_RANGE, dateIn, dateOut);
 		}
 
@@ -112,9 +112,9 @@ public class RoomBookingServiceImpl implements RoomBookingService {
 		}
 
 		if (exists(booking)) {
-			String dateIn = DateFormatUtils.format(booking.getDateIn(), RoomBookingServiceImpl.DATE_FORMAT);
-			String hourIn = DateFormatUtils.format(booking.getDateIn(), RoomBookingServiceImpl.TIME_FORMAT);
-			String hourOut = DateFormatUtils.format(booking.getDateOut(), RoomBookingServiceImpl.TIME_FORMAT);
+			String dateIn = DateFormatUtils.format(booking.getBeginTime(), RoomBookingServiceImpl.DATE_FORMAT);
+			String hourIn = DateFormatUtils.format(booking.getBeginTime(), RoomBookingServiceImpl.TIME_FORMAT);
+			String hourOut = DateFormatUtils.format(booking.getEndTime(), RoomBookingServiceImpl.TIME_FORMAT);
 			throw new BookingException(ExceptionMessage.ROOM_ALREADY_BOOKED, 
 									   booking.getResource().getName(), dateIn, hourIn, hourOut);
 		}
@@ -122,11 +122,11 @@ public class RoomBookingServiceImpl implements RoomBookingService {
 		Date bkgMinHour = DateUtils.setHours(date, BKG_MIN_HOUR);
 		Date bkgMaxHour = DateUtils.setHours(date, BKG_MAX_HOUR);
 
-		if (DateUtils.truncatedCompareTo(booking.getDateIn(), bkgMinHour, Calendar.HOUR_OF_DAY) < 0 ||
-				DateUtils.truncatedCompareTo(booking.getDateOut(), bkgMaxHour, Calendar.HOUR_OF_DAY) > 0) {
-			String bbp = DateFormatUtils.format(DateUtils.truncate(booking.getDateIn(), Calendar.HOUR_OF_DAY), 
+		if (DateUtils.truncatedCompareTo(booking.getBeginTime(), bkgMinHour, Calendar.HOUR_OF_DAY) < 0 ||
+				DateUtils.truncatedCompareTo(booking.getEndTime(), bkgMaxHour, Calendar.HOUR_OF_DAY) > 0) {
+			String bbp = DateFormatUtils.format(DateUtils.truncate(booking.getBeginTime(), Calendar.HOUR_OF_DAY), 
 												RoomBookingServiceImpl.TIME_FORMAT);
-			String bep = DateFormatUtils.format(DateUtils.truncate(booking.getDateOut(), Calendar.HOUR_OF_DAY), 
+			String bep = DateFormatUtils.format(DateUtils.truncate(booking.getEndTime(), Calendar.HOUR_OF_DAY), 
 												RoomBookingServiceImpl.TIME_FORMAT);
 			throw new BookingException(ExceptionMessage.INVALID_PERIOD, bbp, bep);
 		}
@@ -141,7 +141,7 @@ public class RoomBookingServiceImpl implements RoomBookingService {
 	@Override
 	public void cancel(RoomBooking booking) throws ApplicationException {
 		Date now = new Date();
-		Date deadlineDate = DateUtils.addDays(booking.getDateIn(), -BOOKING_CANCEL_DEADLINE);
+		Date deadlineDate = DateUtils.addDays(booking.getBeginTime(), -BOOKING_CANCEL_DEADLINE);
 
 		if (DateUtils.truncatedCompareTo(now, deadlineDate, Calendar.DAY_OF_YEAR) > 0) {
 			throw new BookingException(ExceptionMessage.CANCEL_DEADLINE_EXCEEDED, BOOKING_CANCEL_DEADLINE);

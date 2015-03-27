@@ -2,9 +2,10 @@ package br.com.abware.jcondo.booking.model;
 
 public enum BookingStatus {
 
-	OPENED("booking.status.opened"),
+	BOOKED("booking.status.booked"),
 	PAID("booking.status.paid"),
-	CANCELLED("booking.status.cancelled");
+	CANCELLED("booking.status.cancelled"),
+	DELETED("booking.status.deleted");
 
 	private String label;
 	

@@ -3,33 +3,35 @@ package br.com.abware.jcondo.booking.model;
 import java.util.Date;
 
 import br.com.abware.jcondo.core.model.BaseModel;
-import br.com.abware.jcondo.core.model.Flat;
+import br.com.abware.jcondo.core.model.Domain;
 import br.com.abware.jcondo.core.model.Person;
 
-public class Booking<Resource extends Bookable> implements BaseModel {
+public abstract class Booking<Resource extends Bookable> implements BaseModel {
 
 	private long id;
-	
+
 	private Person person;
-	
-	private Flat flat;
 
-	private Resource resource;
+	private Domain domain;
 
-	private Date dateIn;
-	
-	private Date dateOut;
+	private Date beginDate;
+
+	private Date endDate;
 
 	private double price;
 
 	private BookingStatus status;
-	
-	public Booking(Person person, Resource resource, Date dateIn, Date dateOut) {
+
+	public Booking(Person person, Domain domain, Date beginDate, Date endDate) {
 		this.person = person;
-		this.resource = resource;
-		this.dateIn = dateIn;
-		this.dateOut = dateOut;
+		this.domain = domain;
+		this.beginDate = beginDate;
+		this.endDate = endDate;
 	}
+
+	public abstract Resource getResource();
+
+	public abstract void setResource(Resource resource);
 
 	public Booking() {
 	}
@@ -50,36 +52,28 @@ public class Booking<Resource extends Bookable> implements BaseModel {
 		this.person = person;
 	}
 
-	public Flat getFlat() {
-		return flat;
+	public Domain getDomain() {
+		return domain;
 	}
 
-	public void setFlat(Flat flat) {
-		this.flat = flat;
+	public void setDomain(Domain domain) {
+		this.domain = domain;
 	}
 
-	public Resource getResource() {
-		return resource;
+	public Date getBeginDate() {
+		return beginDate;
 	}
 
-	public void setRoom(Resource resource) {
-		this.resource = resource;
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
 	}
 
-	public Date getDateIn() {
-		return dateIn;
+	public Date getEndDate() {
+		return endDate;
 	}
 
-	public void setDateIn(Date date) {
-		this.dateIn = date;
-	}
-
-	public Date getDateOut() {
-		return dateOut;
-	}
-
-	public void setDateOut(Date dateOut) {
-		this.dateOut = dateOut;
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 	public double getPrice() {
