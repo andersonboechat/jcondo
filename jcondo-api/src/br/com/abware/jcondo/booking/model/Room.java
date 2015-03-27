@@ -4,13 +4,14 @@ import java.util.List;
 
 import br.com.abware.jcondo.booking.model.Bookable;
 import br.com.abware.jcondo.core.model.BaseModel;
+import br.com.abware.jcondo.core.model.Document;
 import br.com.abware.jcondo.core.model.Image;
 
 public class Room implements Bookable, BaseModel {
 
 	private long id;
 	
-	private long imageFolderId;
+	private long folderId;
 
 	private String name;
 	
@@ -18,7 +19,7 @@ public class Room implements Bookable, BaseModel {
 	
 	private double price;
 	
-	private String agreement;
+	private Document agreement;
 	
 	private boolean available;
 	
@@ -32,12 +33,12 @@ public class Room implements Bookable, BaseModel {
 		this.id = id;
 	}
 
-	public long getImageFolderId() {
-		return imageFolderId;
+	public long getFolderId() {
+		return folderId;
 	}
 
-	public void setImageFolderId(long imageFolderId) {
-		this.imageFolderId = imageFolderId;
+	public void setFolderId(long imageFolderId) {
+		this.folderId = imageFolderId;
 	}
 
 	public String getName() {
@@ -64,11 +65,11 @@ public class Room implements Bookable, BaseModel {
 		this.price = price;
 	}
 
-	public String getAgreement() {
+	public Document getAgreement() {
 		return agreement;
 	}
 
-	public void setAgreement(String agreement) {
+	public void setAgreement(Document agreement) {
 		this.agreement = agreement;
 	}
 
