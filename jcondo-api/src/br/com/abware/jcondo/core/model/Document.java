@@ -1,25 +1,27 @@
 package br.com.abware.jcondo.core.model;
 
-import br.com.abware.jcondo.core.model.BaseModel;
-
-public class Document implements BaseModel {
+public class Document extends Archive {
 
 	private long id;
 	
-	private String name;
-
+	private long folder;
+	
 	private String path;
 	
-	private Domain domain;
+	private String name;
+	
+	private String description;
 	
 	public Document() {
 	}
 
-	public Document(long id, String name, String path) {
+	public Document(long id, long folder, String path, String name, String description) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.folder = folder;
 		this.path = path;
+		this.name = name;
+		this.description = description;
 	}
 
 	public long getId() {
@@ -28,6 +30,14 @@ public class Document implements BaseModel {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public long getFolder() {
+		return folder;
+	}
+
+	public void setFolder(long folder) {
+		this.folder = folder;
 	}
 
 	public String getName() {
@@ -46,12 +56,12 @@ public class Document implements BaseModel {
 		this.path = path;
 	}
 
-	public Domain getDomain() {
-		return domain;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDomain(Domain domain) {
-		this.domain = domain;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }
