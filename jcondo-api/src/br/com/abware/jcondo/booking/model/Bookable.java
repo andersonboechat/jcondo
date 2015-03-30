@@ -1,6 +1,6 @@
 package br.com.abware.jcondo.booking.model;
 
-import br.com.abware.jcondo.core.model.Document;
+import br.com.abware.jcondo.core.model.Archive;
 
 public interface Bookable {
 
@@ -8,6 +8,6 @@ public interface Bookable {
 
 	public boolean isAvailable();
 
-	public Document getAgreement();
+	public Archive getAgreement();
 
 }

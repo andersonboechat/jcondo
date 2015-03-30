@@ -3,9 +3,8 @@ package br.com.abware.jcondo.booking.model;
 import java.util.List;
 
 import br.com.abware.jcondo.booking.model.Bookable;
+import br.com.abware.jcondo.core.model.Archive;
 import br.com.abware.jcondo.core.model.BaseModel;
-import br.com.abware.jcondo.core.model.Document;
-import br.com.abware.jcondo.core.model.Image;
 
 public class Room implements Bookable, BaseModel {
 
@@ -19,11 +18,25 @@ public class Room implements Bookable, BaseModel {
 	
 	private double price;
 	
-	private Document agreement;
+	private Archive agreement;
 	
 	private boolean available;
 	
-	private List<Image> images;
+	private List<Archive> images;
+	
+	@Override
+	public boolean equals(Object obj) {
+		return obj != null && (super.equals(obj) || (obj instanceof Room && ((Room) obj).getName().equals(name)));
+	}
+	
+	@Override
+	public int hashCode() {
+        long hash = 7;
+        hash = 31 * hash + id;
+        hash = 31 * hash + folderId;
+        hash = 31 * hash + (null == name ? 0 : name.hashCode());
+        return (int) hash;
+	}
 
 	public long getId() {
 		return id;
@@ -65,11 +78,11 @@ public class Room implements Bookable, BaseModel {
 		this.price = price;
 	}
 
-	public Document getAgreement() {
+	public Archive getAgreement() {
 		return agreement;
 	}
 
-	public void setAgreement(Document agreement) {
+	public void setAgreement(Archive agreement) {
 		this.agreement = agreement;
 	}
 
@@ -81,11 +94,11 @@ public class Room implements Bookable, BaseModel {
 		this.available = available;
 	}
 
-	public List<Image> getImages() {
+	public List<Archive> getImages() {
 		return images;
 	}
 
-	public void setImages(List<Image> images) {
+	public void setImages(List<Archive> images) {
 		this.images = images;
 	}
 
