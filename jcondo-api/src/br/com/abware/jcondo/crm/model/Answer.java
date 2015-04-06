@@ -2,16 +2,57 @@ package br.com.abware.jcondo.crm.model;
 
 import java.util.Date;
 
+import br.com.abware.jcondo.core.model.BaseModel;
 import br.com.abware.jcondo.core.model.Person;
 
-public interface Answer {
+public class Answer implements BaseModel {
 
-	public long getId();
+	private long id;
+
+	private Date date;
+
+	private String text;
+
+	private Person person;
 	
-	public Date getDate();
+	public Answer() {
+	}
+	
+	public Answer(Person person) {
+		this();
+		this.person = person;
+	}
 
-	public String getText();	
+	public long getId() {
+		return id;
+	}
 
-	public Person getPerson();
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
 
 }

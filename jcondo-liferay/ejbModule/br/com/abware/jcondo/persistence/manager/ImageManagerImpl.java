@@ -41,7 +41,7 @@ public class ImageManagerImpl extends AbstractManager<DLFileEntry, Image> implem
 		List<Image> images = new ArrayList<Image>();
 
 		try {
-			DLFolder folder = DLFolderLocalServiceUtil.getFolder(room.getImageFolderId());
+			DLFolder folder = DLFolderLocalServiceUtil.getFolder(room.getFolderId());
 			List<FileEntry> fileEntries = DLAppLocalServiceUtil.getFileEntries(folder.getRepositoryId(), folder.getFolderId());
 	
 			for (FileEntry fe : fileEntries) {

@@ -20,6 +20,15 @@ public class Occurrence implements BaseModel {
 	private Person person;
 	
 	private Answer answer;
+	
+	public Occurrence() {
+	}
+
+	public Occurrence(OccurrenceType type, Person person) {
+		super();
+		this.type = type;
+		this.person = person;
+	}
 
 	public long getId() {
 		return id;
