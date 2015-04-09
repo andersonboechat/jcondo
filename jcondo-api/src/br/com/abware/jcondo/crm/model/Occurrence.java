@@ -30,6 +30,27 @@ public class Occurrence implements BaseModel {
 		this.person = person;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return obj != null && (super.equals(obj) || (obj instanceof Occurrence && ((Occurrence) obj).getCode().equals(code)));
+	}
+	
+	@Override
+	public int hashCode() {
+        long hash = 7;
+        hash = 31 * hash + id;
+        hash = 31 * hash + (null == code ? 0 : code.hashCode());
+        return (int) hash;
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("{id: ").append(id).append(", code:").append(code)
+		  .append(", date:").append(date).append(", type:").append(type).append("}");
+		return sb.toString();
+	}	
+	
 	public long getId() {
 		return id;
 	}

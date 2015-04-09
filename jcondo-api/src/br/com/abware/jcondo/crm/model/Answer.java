@@ -23,6 +23,27 @@ public class Answer implements BaseModel {
 		this.person = person;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return obj != null && (super.equals(obj) || (obj instanceof Answer && ((Answer) obj).getId() == id));
+	}
+	
+	@Override
+	public int hashCode() {
+        long hash = 7;
+        hash = 31 * hash + id;
+        hash = 31 * hash + (null == date ? 0 : date.hashCode());
+        hash = 31 * hash + (null == person ? 0 : person.hashCode());
+        return (int) hash;
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("{id: ").append(id).append(", date:").append(date).append(", person:").append(person).append("}");
+		return sb.toString();
+	}	
+	
 	public long getId() {
 		return id;
 	}
