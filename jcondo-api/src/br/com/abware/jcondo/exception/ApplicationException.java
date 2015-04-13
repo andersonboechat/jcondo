@@ -1,13 +1,8 @@
 package br.com.abware.jcondo.exception;
 
-import java.text.MessageFormat;
-import java.util.ResourceBundle;
-
 public class ApplicationException extends Exception {
 
 	private static final long serialVersionUID = 1L;
-
-	private ResourceBundle rb = ResourceBundle.getBundle("AppException");
 
 	protected Object[] args;
 
@@ -16,9 +11,8 @@ public class ApplicationException extends Exception {
 		this.args = args;
 	}
 
-	@Override
-	public String getLocalizedMessage() {
-		return MessageFormat.format(rb.getString(getMessage()), ((Object) args));
+	public ApplicationException(String message, Object ... args) {
+		this(null, message, args);
 	}
 
 	public Object[] getArgs() {

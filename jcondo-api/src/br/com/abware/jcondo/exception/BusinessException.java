@@ -7,5 +7,9 @@ public class BusinessException extends ApplicationException {
 	public BusinessException(Throwable throwable, String message, Object ... args) {
 		super(throwable, message, args);
 	}
-	
+
+	public BusinessException(String message, Object ... args) {
+		this(null, message, args);
+	}
+
 }
