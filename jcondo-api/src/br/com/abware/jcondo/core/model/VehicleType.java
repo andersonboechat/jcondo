@@ -1,6 +1,6 @@
 package br.com.abware.jcondo.core.model;
 
-public enum VehicleType {
+public enum VehicleType implements BaseModel {
 
 	CAR("vehicle.type.car"),
 	MOTO("vehicle.type.moto"),
@@ -19,6 +19,11 @@ public enum VehicleType {
 	@Override
 	public String toString() {
 		return label;
+	}
+
+	@Override
+	public long getId() {
+		return ordinal();
 	}
 
 }
