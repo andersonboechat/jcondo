@@ -15,13 +15,32 @@ public class Supplier extends Domain {
 	private Image picture;
 
 	public Supplier() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Supplier(long id, String name) {
 		this();
 		this.id = id;
 		this.name = name;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return obj != null && (super.equals(obj) || (obj instanceof Supplier && name == ((Supplier) obj).getName()));
+	}
+
+	@Override
+	public int hashCode() {
+        long hash = 7;
+        hash = 31 * hash + id;
+        hash = 31 * hash + (null == name ? 0 : name.hashCode());
+        return (int) hash;
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("{id: ").append(id).append(", name:").append(name).append("}");
+		return sb.toString();
 	}
 
 	public String getName() {
