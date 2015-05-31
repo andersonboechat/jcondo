@@ -2,16 +2,8 @@ package br.com.abware.jcondo.core.model;
 
 public class Image extends Archive {
 
-	private long id;
-	
 	private long folder;
 	
-	private String path;
-	
-	private String name;
-	
-	private String description;
-
 	public Image() {
 		super();
 	}
@@ -25,14 +17,6 @@ public class Image extends Archive {
 		this.description = description;
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	public long getFolder() {
 		return folder;
 	}
@@ -41,28 +25,4 @@ public class Image extends Archive {
 		this.folder = folder;
 	}
 
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescrption(String description) {
-		this.description = description;
-	}
-	
 }

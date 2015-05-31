@@ -1,18 +1,18 @@
 package br.com.abware.jcondo.core.model;
 
 public class Archive implements BaseModel {
+
+	protected long id;
 	
-	private long id;
-	
-	private long folderId;
+	protected long folderId;
 
 	private ArchiveType type;
 
-	private String path;
+	protected String path;
 	
-	private String name;
+	protected String name;
 	
-	private String description;
+	protected String description;
 	
 	public Archive() {
 	}

@@ -8,7 +8,7 @@ import br.com.abware.jcondo.core.model.Person;
 
 public class RoomBooking extends Booking<Room> {
 	
-	private List<Person> guests;
+	private List<Guest> guests;
 
 	public RoomBooking() {
 		super();
@@ -18,11 +18,11 @@ public class RoomBooking extends Booking<Room> {
 		super(person, domain, room, beginDate, endDate);
 	}
 
-	public List<Person> getGuests() {
+	public List<Guest> getGuests() {
 		return guests;
 	}
 
-	public void setGuests(List<Person> guests) {
+	public void setGuests(List<Guest> guests) {
 		this.guests = guests;
 	}
 

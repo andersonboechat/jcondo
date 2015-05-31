@@ -4,6 +4,8 @@ import br.com.abware.jcondo.core.PersonType;
 
 public class Membership implements BaseModel {
 
+	private static final long serialVersionUID = 495096862388184994L;
+
 	private long id;
 	
 	private PersonType type;
