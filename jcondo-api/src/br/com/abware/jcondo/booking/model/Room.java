@@ -22,6 +22,8 @@ public class Room implements Bookable, BaseModel {
 	
 	private boolean available;
 	
+	private int capacity;
+	
 	private List<Archive> images;
 	
 	@Override
@@ -92,6 +94,14 @@ public class Room implements Bookable, BaseModel {
 
 	public void setAvailable(boolean available) {
 		this.available = available;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
 	}
 
 	public List<Archive> getImages() {
