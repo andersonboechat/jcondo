@@ -1,11 +1,15 @@
 package br.com.abware.jcondo.core.model;
 
+import java.util.List;
+
 public class Flat extends Domain {
 
 	private int block;
-	
+
 	private int number;
-	
+
+	private List<Pet> pets;
+
 	public Flat() {
 		// TODO Auto-generated constructor stub
 	}
@@ -52,6 +56,14 @@ public class Flat extends Domain {
 
 	public void setNumber(int number) {
 		this.number = number;
+	}
+
+	public List<Pet> getPets() {
+		return pets;
+	}
+
+	public void setPets(List<Pet> pets) {
+		this.pets = pets;
 	}
 	
 	

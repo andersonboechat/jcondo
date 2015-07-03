@@ -32,6 +32,8 @@ public class Person implements BaseModel {
 	
 	private List<Membership> memberships;
 
+	private List<PhysicalDeficiency> deficiencies;
+
 	public Person() {
 		this.gender = Gender.MALE;
 	}
@@ -153,6 +155,14 @@ public class Person implements BaseModel {
 
 	public void setMemberships(List<Membership> memberships) {
 		this.memberships = memberships;
+	}
+
+	public List<PhysicalDeficiency> getDeficiencies() {
+		return deficiencies;
+	}
+
+	public void setDeficiencies(List<PhysicalDeficiency> deficiencies) {
+		this.deficiencies = deficiencies;
 	}
 
 }
