@@ -4,11 +4,17 @@ import java.util.List;
 
 public class Flat extends Domain {
 
+	private Person person;
+	
 	private int block;
 
 	private int number;
+	
+	private Boolean disables;
 
-	private List<Pet> pets;
+	private Boolean pets;	
+
+	private List<PetType> petTypes;
 
 	public Flat() {
 		// TODO Auto-generated constructor stub
@@ -42,6 +48,14 @@ public class Flat extends Domain {
 		return sb.toString();
 	}
 	
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
 	public int getBlock() {
 		return block;
 	}
@@ -58,14 +72,28 @@ public class Flat extends Domain {
 		this.number = number;
 	}
 
-	public List<Pet> getPets() {
+	public Boolean getDisables() {
+		return disables;
+	}
+
+	public void setDisables(Boolean disables) {
+		this.disables = disables;
+	}
+
+	public Boolean getPets() {
 		return pets;
 	}
 
-	public void setPets(List<Pet> pets) {
+	public void setPets(Boolean pets) {
 		this.pets = pets;
 	}
-	
-	
+
+	public List<PetType> getPetTypes() {
+		return petTypes;
+	}
+
+	public void setPetTypes(List<PetType> petTypes) {
+		this.petTypes = petTypes;
+	}
 
 }

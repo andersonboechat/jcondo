@@ -40,7 +40,7 @@ public class Person implements BaseModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj != null && (super.equals(obj) || (obj instanceof Person && ((Person) obj).getIdentity().equals(identity)));
+		return obj != null && (super.equals(obj) || (obj instanceof Person && ((Person) obj).getId() == id));
 	}
 	
 	@Override

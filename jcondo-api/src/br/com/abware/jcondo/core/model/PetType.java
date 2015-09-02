@@ -1,6 +1,6 @@
 package br.com.abware.jcondo.core.model;
 
-public enum PetType {
+public enum PetType implements BaseModel {
 
 	DOG("pet.type.dog"),
 	CAT("pet.type.cat"),
@@ -16,4 +16,9 @@ public enum PetType {
 	public String getLabel() {
 		return label;
 	}
+	
+	public long getId() {
+		return ordinal();
+	}
+
 }

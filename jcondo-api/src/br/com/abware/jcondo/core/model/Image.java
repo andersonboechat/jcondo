@@ -4,6 +4,10 @@ public class Image extends Archive {
 
 	private long folder;
 	
+	private int width;
+	
+	private int height;
+	
 	public Image() {
 		super();
 	}
@@ -23,6 +27,22 @@ public class Image extends Archive {
 
 	public void setFolder(long folder) {
 		this.folder = folder;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
 	}
 
 }
