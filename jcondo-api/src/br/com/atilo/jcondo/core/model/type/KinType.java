@@ -1,4 +1,4 @@
-package br.com.abware.jcondo.core.model;
+package br.com.atilo.jcondo.core.model.type;
 
 public enum KinType {
 

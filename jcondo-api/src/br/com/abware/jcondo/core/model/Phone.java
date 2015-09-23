@@ -9,6 +9,8 @@ public class Phone implements BaseModel {
 	private String number;
 
 	private PhoneType type;
+	
+	private boolean primary;
 
 	public Phone() {
 	}
@@ -71,6 +73,14 @@ public class Phone implements BaseModel {
 
 	public void setType(PhoneType type) {
 		this.type = type;
+	}
+
+	public boolean isPrimary() {
+		return primary;
+	}
+
+	public void setPrimary(boolean primary) {
+		this.primary = primary;
 	}
 
 }

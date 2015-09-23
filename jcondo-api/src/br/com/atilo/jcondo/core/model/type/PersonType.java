@@ -1,4 +1,4 @@
-package br.com.abware.jcondo.core;
+package br.com.atilo.jcondo.core.model.type;
 
 import br.com.abware.jcondo.core.model.BaseModel;
 

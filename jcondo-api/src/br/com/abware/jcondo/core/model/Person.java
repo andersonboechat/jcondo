@@ -30,6 +30,8 @@ public class Person implements BaseModel {
 
 	private Date birthday;
 	
+	private boolean registerComplete;
+	
 	private List<Membership> memberships;
 
 	private List<PhysicalDeficiency> deficiencies;
@@ -147,6 +149,14 @@ public class Person implements BaseModel {
 
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
+	}
+
+	public boolean getRegisterComplete() {
+		return registerComplete;
+	}
+
+	public void setRegisterComplete(boolean registerComplete) {
+		this.registerComplete = registerComplete;
 	}
 
 	public List<Membership> getMemberships() {

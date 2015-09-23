@@ -15,6 +15,8 @@ public class Flat extends Domain {
 	private Boolean pets;	
 
 	private List<PetType> petTypes;
+	
+	private Boolean brigade;
 
 	public Flat() {
 		// TODO Auto-generated constructor stub
@@ -94,6 +96,14 @@ public class Flat extends Domain {
 
 	public void setPetTypes(List<PetType> petTypes) {
 		this.petTypes = petTypes;
+	}
+
+	public Boolean getBrigade() {
+		return brigade;
+	}
+
+	public void setBrigade(Boolean brigade) {
+		this.brigade = brigade;
 	}
 
 }
